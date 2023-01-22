@@ -235,6 +235,42 @@ $$
 
 $\quad$ BNF rules are said to be *context free* because a rule defining a given syntactic category may be applied in any context that makes reference  to that syntactic category. Sometimes this is not restrictive enough. For example, a node in a binary search tree is either empty or contains a key and two subtrees.
 
+$$
+\langle bin\text{--}search\text{--}tree \rangle ::= \space () | (\langle key \rangle \space \langle bin\text{--}search\text{--}tree \rangle \langle bin\text{--}search\text{--}tree \rangle) \hspace{50cm}
+$$
 
+This correctly describes the structure of each node but fails to mention an important fact about binary search tree: all the keys in the left subtree are less than (or equal to) the key in the current node, and all the keys in the right subtree are greater than the key in the current node. Such contraints are said to be **context sensitive**, because they depend on the context in which they are used.
+
+$\quad$ Context-sensitive constraints also arise when specifying the syntax of programming languages. For instance, in many languages every identifier must be declared before it is used. This constraint on the use of identifiers are sensitive to the context of their use. Formal methods can be used to specify context-sensitive constraints, but these methods are far more complicated than BNF. In practice, the usual approach is first to specify a context-free grammar using BNF. Context-sensitive constraints are then added using other methods, usually prose, to complete the specification of a context-sensitive syntax.
+
+### Induction
+Having described data types inductively, we can use the inductive definitions in two ways: to prove theorems about members of the data type and to write programs that manipulate them. Writing the program is the subject of the next two sections; here we present an example of such a proof.
+
+$\large Theorem.$ Let s $\isin \langle tree \rangle$. Then s contains an odd number of nodes.
+
+Proof. The proof is by induction on the size of s, where we take the size of s to be the number of nodes in s. The induction hypothesis, $IH(k)$, is that any tree of $size \le k$ has an odd number of nodes. We follow the usual prescription for an inductive proof: we first prove that $IH(0)$ is true, and we then prove that whenever $k$ is a number such that $IH$ is true for $k$, then $IH$ is true for $k+1$ also.
+
+i. There are no trees with 0 nodes, so $IH(0)$ holds trivially.
+ii. Let $k$ be a number such that $IH(k)$ holds, that is, any tree with $\le k$ nodes actually has an odd number of nodes. We need to show that $IH(k+1)$ holds as well: that any tree with $\le k + 1 $ nodes has an odd number of nodes. If $s$ has $\le k + 1$ nodes, there are exactly two possibilities according to the BNF definition of $\langle tree \rangle$:
+
+a. $s$ could be of the form $n$, where $n$ is a number. In this case, $s$ has exactly one node, and one is odd.
+
+b. $s$ could be the form $(sym \space s_1 \space s_2)$, where $sym$ is a symbol and $s_1$ and $s_2$ are trees. Now $s_1$ and $s_2$ must have fewer nodes than $s$. Since $s$ has $\le k+1$ nodes, $s_1$ and $s_2$ must have $\le k$ nodes. Therefore they are covered by $IH(k)$, and they must each have an odd number of nodes, say $2n_1 + 1$ and $2n_2 +1$ nodes, respectively. Therefore the total number of nodes in the tree, counting the two subtrees and the root , is
+
+$$
+(2n_1+1)+(2n_2+1) + 1 = 2(n_1+n_2+1) +1
+$$
+which is once again odd.
+
+This completes the proof of the claim that $IH(k+1)$ holds and therefore completes the induction. $\square$
+
+$\quad$ The key to the proof is that the substructures of a tree $s$ are always smaller than $s$ itself. Therefore the induction might be rephrased as follows:
+
+1. $IH$ is true on simple structures (those without substructures).
+2. If $IH$ is true on the substructures of $s$, then it is true on $s$ itself.
+
+## 2.2 Recursively Specified Programs
+
+In the previous section, we used the method of inductive definition to characterize complicated sets. Starting with simple members of the set, the BNF rules were used to build more and more complex member of the set. We now use the same idea to define procedures for manipulating those sets. First we define the simple parts of a procedure's behavior (how it behaves on simple inputs), and then we use this behavior to define more complex behaviors.
 
 
