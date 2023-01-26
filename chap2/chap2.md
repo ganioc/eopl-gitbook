@@ -77,10 +77,8 @@ The BNF definition of list-of-numbers has two rules that correspond to the two p
 $$
 \begin{aligned}
 \langle list\text{--}of\text{--}numbers \rangle &::=()  \\
-
-    \langle list\text{--}of\text{--}numbers \rangle &::=(\langle number\rangle \space . \space \langle list\text{--}of\text{--}numbers \rangle )  \\
+\langle list\text{--}of\text{--}numbers \rangle &::=(\langle number\rangle \space . \space \langle list\text{--}of\text{--}numbers \rangle )  \\
 \end{aligned}
-
 $$
 
 The first rule says that the empty list is in $ \langle list\text{--}of\text{--}numbers \rangle $ , and the second says that if $n$ is in $ \langle number \rangle $ and $l$ is in $ \langle list\text{--}of\text{--}numbers \rangle$, then $(n\space . \space l)$ is in $ \langle list\text{--}of\text{--}numbers \rangle$.
@@ -207,7 +205,6 @@ $$
 \begin{aligned}
 \langle s\text{--}list \rangle &::= (\{\langle symbol\text{--}expression \rangle\}^*) \\
 \langle symbol\text{--}expression \rangle &::= \langle symbol \rangle | \langle s\text{--}list \rangle
-
 \end{aligned}
 $$
 
@@ -272,5 +269,359 @@ $\quad$ The key to the proof is that the substructures of a tree $s$ are always 
 ## 2.2 Recursively Specified Programs
 
 In the previous section, we used the method of inductive definition to characterize complicated sets. Starting with simple members of the set, the BNF rules were used to build more and more complex member of the set. We now use the same idea to define procedures for manipulating those sets. First we define the simple parts of a procedure's behavior (how it behaves on simple inputs), and then we use this behavior to define more complex behaviors.
+
+$\quad$ Imagine we want to define a procedure to find powers of numbers, $e.g.$ $e(n,x)=x^n$, where $n$ is a nonnegative integer and $x \mathllap 0$. It is easy to define a sequence of procedures that compute particular powers: $e_0(x)=x^0$, $e_1(x)=x^1$, $e_2(x)=x^2$:
+
+$$
+\begin{aligned}
+e_0(x)&=1 \\
+e_1(x)&=x \times e_0(x) \\
+e_2(x)&=x \times e_1(x) \\
+e_3(x)&=x \times e_2(x) \\
+\end{aligned}
+$$
+
+In general, if $n$ is a positive integer,
+
+$$
+e_n(x) = x \times e_{n-1}(x)
+$$
+
+At each stage, we use the fact that the problem has already been solved for smaller $n$. We are using mathematical induction. Next the subscript can be removed from $e$ by making it a parameter.
+
+1. If n is 0, $e(n,x) = 1$.
+2. If n is greater than 0, we assume it is known how to solve the problem for $n-1$. That is , we assume that $e(n-1,x)$ is well defined. Therefore, $e(n,x)= x \times e(n-1,x)$.
+
+To prove that $e(n,x) = x^n$ for any nonnegative integer $n$, we proceed by induction on $n$:
+
+1. (Base Step) When $n=0$, $e(0,x) = 1 = x^0$.
+2. (Induction Step) Assume that the procedure works when its first argument is $k$, that is , $e(k,x)=x^k$ for some nonnegative integer $k$. Then we claim that $e(k+1, x)=x^{k+1}$. We calculate as follows
+
+$$
+\begin{aligned}
+e(k+1,x) &= x \times e(k,x) \space & (\text{definition} \space \text{of}\space  e)\\
+&= x \times x^k \space & (\text{IH} \space at \space k) \\
+&= x^{k+1} \space & (\text{fact} \space \text{about} \space  \text{exponentiation})\\
+\end{aligned}
+$$
+
+This completes the induction.
+
+$\quad$ We can write a program to compute $e$ based upon the inductive definition 
+
+```lisp
+(define e
+    (lambda (n x)
+        (if (zero? n)
+            1
+            (* x    
+                (e (- n 1) x)))))
+```
+
+The two branches of the $\text{if}$ expression correspond to the two cases detailed in the definition.
+
+$\quad$ If **we can reduce a problem to a smaller subproblem, we can call the procedure that solved the problem to solve the subproblem.** The solution it returns for the subproblem may then be used to solve the original problem. This works because each time we call the procedure, it is called with a smaller problem, until eventually it is called with a problem that can be solved directly, without another call to itself.
+
+$\quad$ In the above example, we used introduction on integers, so the subproblem was solved by recursively calling the procedure with a smaller value of $n$. When manipulating inductively defined structures, subproblems are usually solved by calling the procedure recursively on a substructure of the original.
+
+$\quad$ When a procedure calls iteself in this manner , its is said to be **recursively defined**. Such **recursive calls** are possible in Scheme and most other languages. The general phenomenon is known as *recursion*, and it occurs in contexts other than programing, such as inductive definitions. Later we shall study how recursion is implemented in programming languages.
+
+### 2.2.1 Deriving Programs from BNF Data Specifications
+Recursion is a powerful programming technique that is used extensively throughout this book. It requires an approach to programming that differs significantly from the style commonly used in statement-oriented languages. For this reason, we devote the reset of this section to this style of programming.
+
+$\quad$ A BNF definiton for the type of data being manipulated serves as a guide both to where recursive calls should be used and to which base cases need to be handled. This is a funcamental point: *when defining a program based on structural induction, the structure of the program should be patterned after the structure of the data*.
+
+$\quad$ A typical kind of program based on inductively defined structures is a predicate that determines whether a given value is a member of a particular data type. Let us write a Scheme predicate, list-of-numbers? that takes a datum and determines whether it belongs to the syntactic category <list-of-numbers>.
+
+```lisp
+> (list-of-numbers? '(1 2 3))
+#t
+> (list-of_numbers? '(1 two 3))
+#f
+> (list-of-numbers? '(1 . 2))
+#f
+```
+
+Recall the definition of <list-of-numbers>:
+
+$$
+\langle list\text{--}of\text{--}numbers \rangle \Coloneqq ()|(\langle number \rangle . \langle list\text{--}of\text{--}numbers \rangle)
+$$
+
+We begin by writing down the simplest behavior of the procedure: what it does when the input is the empty list.
+
+```lisp
+(define list-of-numbers?
+    (lambda (lst)
+        (if (null? lst)
+            ...
+            ...)))
+```
+
+By definition, the empty list is a <list-of-numbers>. Otherwise *lst* is not a <list-of-numbers> unless it is a pair.
+
+```lisp
+(define list-of-numbers?
+    (lambda (lst)
+        (if (null? lst)
+            #t
+            (if (pair? lst)
+                ...
+                #f))))
+```
+(Throughout this book, bars in the left margin indicate lines that have changed isnce an earlier version of the same definition.) If *lst* is a pair, there are two alternatives : either the first element is a number, or it is not. If not, the original value cannot be a list of numbers, so we write
+
+```lisp
+(define list-of-numbers?    
+    (lambda (lst)
+        (if (null? lst)
+            #t
+            (if (pair? lst)
+                (if (number? (car lst))
+                    ...
+                    #f)
+                #f))))
+
+```
+
+The only case left to consider is when the first element of the list in question passes the *number?* test. According to the definition of <list-of-numbers>, a nonempty list belongs to <list-of-numbers> if and only if its first element is a number and its cdr belongs to <list-of-numbers>. Since we already know that *lst* is nonempty and its car is a number, we can deduce that *lst* is a list of numbers if and only if its cdr is a list of numbers. Therefore we write
+
+```lisp
+(define list-of-numbers?
+    (lambda (lst)
+        (if (null? lst)
+            #t
+            (if (pair? lst)
+                (if (number? (car lst))
+                    (list-of-numbers? (cdr lst))
+                    #f)
+                #f))))
+```
+
+To prove the correctness of *list-of-numbers?*, we would like to use induction on the length of *lst*. Howerver, the argument to list-of-numbers? may not be a list at all. This prompts us to define the list-size of a datum to be zero if the datum is not a list and its length if it is a list. We now proceed by induction on the list-size.
+
+1. *list-of-numbers?* works on data of list-size 0, since the only list of lenght 0 is the empty list, for which the corret answer, true, is returned, and if *list-of-numbers?* is not a list, the correct answer, false is returned.
+2. Assuming *list-of-numbers?* works on lists of length *k*, we show that it works on lists of length $k+1$. Let *lst* be such a list. By the definition of <list-of-numbers>, *lst* belongs to <list-of-numbers> if and only if its car is a number and its cdr belongs to <list-of-numbers>. Since *lst* is of length $k+1$, its cdr is of length $k$, so by the induction hypothesis we can determine the cdr's membership in <list-of-numbers> by passing it to *list-of-numbers?*. Hence *list-of-numbers?* correctly computes membership in <list-of-numbers> for lists of length $k+1$, and the induction is complete.
+
+The recursion terminates because every time *list-of-numbers?* is called, it is passed a shorter list. (This assumes lists are finite, which will always be the case unless the list mutation techniques introduced in section 4.5.3 have been used.)
+
+$\quad$ As a second example, we define a procedure *nth-elt* that takes a list *lst* and a zero-based index *n* and returns element number *n* of *lst*.
+
+```lisp
+> (nth-elt '(a b c) 1)
+b
+```
+
+The procedure *nth-elt* does for lists what *vector-ref* does for vectors. (Actually, Scheme provides the procedure *list-ref*, which is the same as *nth-elt* except for error reporting, but we chose another name because standard procedures should not be tampered with unnecessarily.)
+
+$\quad$ When *n* is 0, the answer is simply the car of *lst*. If *n* is greater than 0, then the anser is element $n-1$ of *lst*'s cdr. Since neither the car nor cdr of *lst* exist if *lst* is the empty list, we must guard the *car* and *cdr* operations so that we do not take the car or cdr of an empty list.
+
+```lisp
+(define nth-elt
+    (lambda (lst n)
+        (if (null? lst)
+            (error "nth-elt: list too short")
+            (if (zero? n)
+                (car lst)
+                (nth-elt (cdr lst) (- n 1))))))
+```
+
+The procedure *error* signals an error by printing its arguments, in this case a single string, and then aborting the computation. (*error* is not a standard Scheme procedure, but most implementations provide something of the sort. See appendix D and check your Scheme language reference manual for details.) If error checking were omitted, we would have to rely on *car* and *cdr* to complain about being passed the empty list, but their error messages would be less helpful. For example, if you receive an error message from *car* , you might have to look for uses of *car* throughout your program. Even this would not find the error if *nth-elt* were provided by someone else, so that its definition was not a part of your program.
+
+$\quad$ Let us try one more example of this kind before moving on to harder examples. The standard procedure *length* determines the number of elements in a list.
+
+```lisp
+> (length '(a b c))
+3
+> (length '((x) ()))
+2
+```
+
+We write our own procedure, called *list-length*, to do the same thing. The length of the empty list is 0.
+
+```lisp
+(define list-length
+    (lambda (lst)
+        (if (null? lst)
+            0
+            ...)))
+```
+
+The blank is filled in by observing theat the length of a nonempty list is one more than the length of its cdr.
+
+```lisp
+(define list-length
+    (lambda (lst)
+        (if (null? lst) 
+            0
+            (+ 1 (list-length (cdr lst))))))
+```
+
+$\circ$ Exercise 2.2.1
+The procedures *nth-elt* and *list-length* do not check whether their arguments are of the expected type. What happens on your Scheme system if they are passed symbols when a list is expected? What is the behavior of *list-ref* and *length* in such cases? Write your own versions that guard against these situations. Is it always necessary to signal errors when this occurs, or can a sensible value sometimes be returned? When is it worth the effort to check that arguments are of the right type? Why? $\square$
+
+### 2.2.2 Three Important Examples
+In this section, we present three simple recursive procedures that will be used as examples later in this book. As in previous examples, they are defined so that (1) the structure of a program reflects the structure of its data and (2) recursive calls are employed at points where recursion is used in the data type's inductive definition.
+
+$\quad$ the first procedure is *remove-list*, which takes two arguments: a symbol, s, and a list of symbols, *los*. It returns a list with the same elements arranged in the same order as *los*, except that the first occurrence of the symbol *s* is removed. If there is no occurrence of *s* in *los*, then *los* is returned.
+
+```lisp
+> (remove-first 'a '(a b c))
+(b c)
+> (remove-first 'b '(e f g))
+(e f g)
+> (remove-first 'a4 '(c1 a4 c1 a4))
+(c1 c1 a4)
+> (remove-first 'x '())
+()
+```
+
+$\quad$ Before we start on the program, we must complete the problem specification by defining the data type <list-of-symbols>. Unlike the s-lists introduced in the last section, these lists of symbols do not contain sublists.
+
+$$
+\langle list \text{--} of \text{--} symbols \rangle ::= () |(\langle symbol \rangle . \langle list \text{--} of \text{--} symbols \rangle)
+$$
+
+A list of symbols is either the empty list or a list whose car is a symbol and whose cdr is a list of symbols. If the list is empty, there are no occurrences of *s* to remove, so the answer is the empty list.
+
+```lisp
+(define remove-first
+    (lambda (s los)
+        (if (null? los)
+            '()
+            ...)))
+```
+
+If *los* is nonempty, is there some case where we can determine the answer immediately? If $los=(s \space s_1 \space ... \space s_{n-1})$, the first occurrence of *s* is as the first element of *los*. So the result of removing it is just $(s_1 \space ... \space s_{n-1})$.
+
+If the first element of *los* is not *s*, say $los=(s_0 \space s_1 \space \dotso \space s_{n-1})$, then we know that $s_0$ is not the first occurrence of $s$. Therefore the first element of the answer must be $s_0$. Furthermore, the first occurrrence of $s$ in $los$ must be its first occurrence in $(s_1 \space \dotso \space s_{n-1})$. So the rest of the answer must be the result of removing the first occurrence of $s$ from the cdr of $los$. Since the cdr of $los$ is shorter than $los$, we may recursively call $remove\text{--}first$ to remove $s$ from the cdr of $los$. Thus using $(cons \space (car \space los) \space (remove\text{--}first \space s \space (cdr \space los)))$, the answer may be obtained. With this, the complete definition of *remove-first* follows.
+
+```lisp
+(define remove-first
+    (lambda (s los)
+        (if (null? los)
+            '()
+            (if (eq? (car los) s)
+                (cdr los)
+                (cons (car los) (remove-first s (cdr los)))))))
+```
+
+$\circ$ Exercise 2.2.2
+In the definition of *remove-first*, if the inner *if*'s alternative $(cons \space \dotso)$ were replaced by $(remove \text{--} first \space s \space (cdr \space los))$, what function would be resulting procedure compute? $\square$
+
+$\quad$ The second procedure is *remove*, defined over symbols and lists of symbols. It is similar to *remove-first*, but it removes all occurrences of a given symbol from a list of symbols, not just the first.
+
+```lisp
+> (remove 'a4 '(c1 a4 d1 a4))
+(c1 d1)
+```
+
+Since *remove-first* and *remove* work on the same input, their structure is similar. If the list *los* is empty, there are no occurrences to remove, so the answer is again the empty list. If *los* is nonempty, there are again two cases to consider. If the first element of *los* is not *s*, the answer is obatined as in *remove-first*.
+
+```lisp
+(define remove
+    (lambda (s los)
+        (if (null? los)
+            '()
+            (if (eq? (car los) s)
+            ...
+            (cons (car los) (remove s (cdr los))))))
+```
+
+If the first element of *los* is the same as *s*, certainly the first element is not to be part of the result. But we are not quite done: all the occurrences of *s* must still be removed from the cdr of *los*. Once again this may be accomplished by invoking *remove* recursively on the cdr of *los*.
+
+```lisp
+(define remove
+    (lambda (s los)
+        (if (null? los)
+            '()
+            (if (eq? (car los) s)
+                (remove s (cdr los))
+                (cons (car los) (remove s (cdr los)))))))
+```
+
+$\circ$ Exercise 2.2.3
+In the definition of *remove*, if the inner *if*'s alternative *(cons ...)* were replaced by *(remove s (cdr los))*, what function would the resulting procedure compute? $\square$
+
+$\quad$ The last of our examples is *subst*. It takes three arguments: two symbols, *new* and *old*, and an s-list *slst*. All elements of *slst* are examined, and a new list is returned that is similar to *slst* but with all occurrences of *old* replaced by instances of *new*.
+
+```lisp
+> (subst 'a 'b '((b c) (b d)))
+((a c) (a d))
+```
+
+Since *subst* is defined over s-lists, its organization reflects the definition of s-lists
+
+$$
+\begin{aligned}
+\langle s \text{--} list \rangle  &::= ({\langle symbol \text{--} expression \rangle}^*) \\
+\langle symbol \text{--} expression \rangle &::= \langle symbol \rangle | \langle s \text{--} list \rangle 
+\end{aligned}
+$$
+
+If the list is empty, there are no occurrences of *old* to replace.
+
+```lisp
+(define subst
+    (lambda (new old slst)
+        (if (null? slst)
+            '()
+            ...)))
+```
+
+If *slst* is nonempty, its car is a member of <symbol-expression> and its cdr is another s-list. Thus the program brances on the type of the symbol expression in the car of slst. If it is a symbol, we need to ask whether it is the same as the symbol *old*. If it is , the car of the new answer is *new*; if not, the car of the answer is the same as the car of *slst*. In either case, to obtain the answer's cdr, we need to change all occurrences of *old* to *new* in the cdr of *slst*. Since the cdr of *slst* is a smaller list, we may use recursion.
+
+```lisp
+(define subst
+    (lambda (new old slst)
+        (if (null? slst)
+            '()
+            (if (symbol? (car slst))
+                (if (eq? (car slst) old)
+                    (cons new (subst new old (cdr slst)))
+                    (cons (car slst) (subst new old (cdr slst))))
+                ))))
+```
+
+In the final case to be considered the car of *slst* is a list. Since the car and cdr of *slst* are both lists, the answer is obtained by invoking *subst* on both and consing the results together.
+
+```lisp
+(define subst
+    (lambda (new old slst)
+        (if (null? slst)
+            '()
+            (if (symbol? (car slst))
+                (if (eq? (car slst) old)
+                    (cons new (subst new old (cdr slst)))
+                    (cons (car slst) (subst new old (cdr slst))))
+                (cons (subst new old (car slst))
+                    (subst new olf (cdr slst)))))))
+```
+
+This definition has been completed by following the structure of <s-list> and then <symbol-expression> and checking for *old* when dealing with symbols.
+
+$\quad$ The subexpression (subst new old (cdr slst)) appears three times in the above definition. This redundancy can be eliminated by noting that when *slst* is nonnull, the answer's car and cdr may be independently computed and then combined with *cons*. The answer's cdr is obtained by invoking *subst* on the cdr of *slst*. The answer's car is obtained by substituting *new* for *old* in the car of *slst*, but the type of *slst*'s car is <symbol-expression> , not <s-list> , so *subst* cannot be used directly. The solution is to make a separate procedure for handling substitutions on members of <symbol-expression>.
+
+```lisp
+(define subst
+    (lambda (new old slst)
+        (if (null? slst)
+            '()
+            (cons (subst-symbol-expression new old (car slst))
+                (subst new old (cdr slst))))))
+(define subst-symbol-expression
+    (lambda (new old se)
+        (if (symbol? se)
+            (if (eq? se old) new se)
+            (subst new old se))))
+```
+
+Since we have strictly followed the BNF definition of <s-list> and <symbol-expression>, this recursion is guaranteed to halt. Observe that *subst* and *subst-symbol-expression* call each other recursively. Such procedures are said to be *mutually recursive*.
+
+$\circ$ Exercise 2.2.4
+In the last line of *subst-symbol-expression*, the recursion is on *se* and not a smaller substructure. Why is the recursion guaranteed to halt? $\square$
+
+$\circ$ Exercise 2.2.5
+Write *subst* using *map*. $\square$
 
 
