@@ -2,7 +2,7 @@
 chap 2
 ========
 
-# 2 Induction , Recursion, and scope
+# 2 Induction, Recursion, and scope
 This chapter introduces the fundamental technique of recursive programming, along with its relation to the mathematical technique of induction. The notion of scope, which plays a primary role in programming language, is also presented. Finally, the material in this chapter will improve your facility with the tools introduced in chapter 1. Section 2.1 and section 2.2 introduce techniques for inductively specifying data structures and show how such specifications may be used to guide the construction of recursive programs. Section 2.3 then introduces the notions of variable binding and scope.
 
 The programming exercises are the heart of this chapter. They provide experience that is essential for mastering the technique of recursive programming upon which the rest of this book is based.
@@ -624,4 +624,260 @@ In the last line of *subst-symbol-expression*, the recursion is on *se* and not 
 $\circ$ Exercise 2.2.5
 Write *subst* using *map*. $\square$
 
+$\quad$ The docomposition of *subst* into two procedures, one for each syntactic category, is an important technique. It allows us to think about one syntactic category at a time, which is important in more complicated situations.
+
+$\quad$ There are many other situations in which it may be helpful or necessary to introduce auxiliary procedures to solve a problem. Always feel free to do so. In some cases the new procedure is necessary in order to introduce an additional parameter. As an example, we consider the problem of summing all the values in a vector.
+
+$\quad$ Since vectors require a program structure that differs from the ones we have used for lists , let us first solve the problem of summing the values in a list of numbers. This problem has a natural recursive solution because nonempty lists decompose naturally into their car and cdr components. We return 0 as the sum of the elements in the empty list.
+
+```lisp
+(define list-sim
+    (lambda (lon)
+        (if (null? lon)
+            0
+            (+ (car lon)
+                (list-sum (cdr lon))))))
+```
+
+It is not possible to proceed in this way with vectors, because they do not decompose as readily. Sometimes the best way to solve a problem is to solve a more general problem and use it to solve the original problem as a special case. For the vector sum problem, since we cannot decompose vectors, we generalize the problem to compute the sum of part of the vector. We define *partial-vecotr-sum*, which takes a vector of numbers, *von*, and a number, *n*, and returns the sum of the first *n* values in von.
+
+```lisp
+(define partial-vector-sum
+    (lambda (von n)
+        (if (zero? n)
+            0
+            (+ (vector-ref von (- n 1))
+                (partial-vector-sum von (- n 1))))))
+```
+
+Observe that *von* does not change. In the next chapter we shall see how the conceptual overhead of passing such parameters may be avoided. Since *n* decreases steadily to zero, a proof of correctness for this program would proceed by induction on n. It is now a simple matter to solve our original problem
+
+```lisp
+(define vector-sum
+    (lambda (von)
+        (partial-vector-sum von (vector-length von))))
+```
+
+$\circ$ Exercise 2.2.6
+Prove the correctness of *partial-vector-sum* with the following assumptions: $0 \leq n < length(von)$. $\square$
+
+$\quad$ Getting the knack of writing recursive programs involves practice. Thus we conclude this section with a number of exercises.
+
+$\bullet$ Exercise 2.2.7
+Define, test, and debug the following procedures. Assume that *s* is any symbol, *n* is a nonnegative integer, *lst* is a list, *v* is a vector, *los* is a list of symbols, *vos* is a vector of symbols, *slst* is an s-list, and *x* is any object; and similarly *s1* is a symbol, *los2* is a list of symbols, *x1* is an object, etc. Make no other assumptions about the data unless further restrictions are given as part of a particular problem. You do not have to check that the input matches the description; for each procedure, assume that its input values are members of the specified data types.
+
+$\quad$ To test your procedures, at the very minimum try all of the given examples. You should also use other examples to test your procedures, since the given examples are not adequate to reveal all possible errors.
+
+1. (duple n x) returns a list containing *n* copies of x.
+
+```lisp
+> (duple 2 3)
+(3 3)
+> (duple 4 '(ho ho))
+((ho ho) (ho ho) (ho ho) (ho ho))
+> (duple 0 '(blah))
+()
+```
+2. (invert lst), where *lst* is a list of 2-lists (lists of length two), returns a list with each 2-list reversed.
+
+```lisp
+> (invert '((a 1) (a 2) (b 1) (b 2)))
+((1 a) (2 a) (1 b) (2 b))
+```
+3. (list-index s los) returns the zero-based index of the first occurrence of *s* in *los*, or -1 if there is no occurrence of *s* in *los*.
+
+```lisp
+> (list-index 'c '(a b c d))
+2
+> (list-ref '(a b c) (list-index 'b '(a b c)))
+b
+```
+4. (vector-index s vos) returns the zero-based index of the first occurrence of *s* in *vos*, or -1 if there is no occurrence of *s* in *vos*.
+```lisp
+> (vector-index 'c '#(a b c d))
+2
+> (vector-ref '#(a b c) (vector-index 'b '#(a b c)))
+b
+```
+5. (ribassoc s los v fail-value) returns the value in *v* that is associated with *s*, or *fail-value* if there is no associated value. If the first occurrence of *s* in *los* has index *n*, the value associated with *s* is the $n^{th}$ value in *v*. There is no associated value for *s* if *s* is not a member of *los*. You may assume that *los* and *v* are the same length.
+
+```lisp
+> (ribassoc 'b '(a b c) '#(1 2 3) 'fail)
+2
+> (ribassoc 'c '(a b foo) '#(3 squiggle bar) 'fail)
+fail
+> (ribassoc 'i '(a i o i) '#(fx (fz) () (fm fe)) 'fail)
+(fz)
+```
+
+6. (filter-in p lst), where *p* is a predicate, returns the list of those elements in *lst* that satisfy the predicate.
+
+```lisp
+> (filter-in number? '(a 2 (1 3) b 7))
+(2 7)
+> (filter-in symbol? '(1 2 (b c) 17 foo))
+(a foo)
+```
+
+7. (product los1 los2) returns a list of 2-lists that represents the Cartesian product of los1 and los2. The 2-lists may appear in any order.
+
+```lisp
+> (product '(a b c) '(x y))
+((a x) (b y) (b x) (b y) (c x) (c y))
+```
+
+8. (swapper s1 s2 slst) returns a list the same as *slst*, but with all occurrences of *s1* replaced by *s2* and all occurrences of *s2* replaced by *s1*.
+```lisp
+> (swapper 'a 'd '(a b c d))
+(d b c a)
+> (swapper 'x 'y '((x) y (z (x))))
+((y) x (z (y)))
+```
+
+9. (rotate los) returns a list similar to *los*, except that the last element of *los* becomes the first in the returned list.
+
+```lisp
+> (rotate '(a b c d))
+(d a b c)
+> (rotate '(notmuch))
+(notmuch)
+> (rotate '())
+()
+```
+
+$\bull$ Exercise 2.2.8
+These are a bit harder.
+
+1. (down lst) wraps parentheses around each top-level element of *lst*.
+
+```lisp
+> (down '(1 2 3))
+((1) (2) (3))
+> (down '(a (more (complicated)) object))
+((a) ((more (complicated))) (object))
+```
+
+2. (up lst) removes a pair of parentheses from each top-level element of *lst*. If a top-level element is not a list, it is included in the result, as is. The value of (up (down lst)) is equivalent to *lst*, but (down (up lst)) is not necessarily lst.
+
+```lisp
+> (up '((1 2) (3 4)))
+(1 2 3 4)
+> (up '((x (y)) z))
+(x (y) z)
+```
+
+3. (count-occurrences s slst) returns the number of occurrences of *s* in *slst*.
+
+```lisp
+> (count-occurrences 'x '((f x) y (((x z) x))))
+3
+> (count-occurrences 'w '((f x) y (((x z) x))))
+0
+```
+
+4. (flatten slst) returns a list of the symbols contained in *slst* in the order in which they occur when *slst* is printed. Intuitively, *flatten* removes all the inner parentheses from its argument.
+
+```lisp
+> (flatten '(a b c))
+(a b c)
+> (flatten '((a b) c (((d)) e)))
+(a b c d e)
+> (flatten '(a b (() (c))))
+(a b c)
+```
+
+5. (merge lon1 lon2), where *lon1* and *lon2* are lists of numbers that are sorted in ascending order, returns a sorted list of all the numbers in *lon1* and *lon2*.
+```lisp
+> (merge '(1 4) '(1 2 8))
+(1 1 2 4 8)
+> (merge '(35 62 81 90 91) '(3 83 85 89==90))
+(3 35 62 81 83 85 90 90 91)
+```
+
+$\square$
+
+$\bullet$ Exercise 2.2.9
+These are harder still:
+1. (path n bst), where *n* is a number and *bst* is a binary search tree that contains the number *n*, returns a list of *Ls* and *Rs* showing how to find the node containing *n*. If *n* is found at the root, it returns the empty list.
+
+```lisp
+> (path 17 '(14 (7 () (12 () ()))
+                (26 (20 (17 () ())
+                        ())
+                    (31 () ()))))
+(R L L)
+```
+
+2. (car&cdr s slst errvalue) returns an expression that, when evaluated, produces the code for a procedure that takes a list with the same structure as *slst* and returns the value in the same position as the leftmost occurrence of *s* in *slst*. If *s* does not occur in *slst*, then *errvalue* is returned.
+
+```lisp
+> (car&cdr 'a '(a b c) 'fail)
+(lambda (lst) (car lst))
+> (car&cdr 'c '(a b c) 'fail)
+(lambda (lst) (car (cdr (cdr lst))))
+> (car&cdr 'dog '(cat lion (fish dog) pig) 'fail)
+(lambda (lst) (car (cdr (car (cdr (cdr lst))))))
+> (car&cdr 'a '(b c) 'fail)
+fail
+```
+
+3. (car&cdr2 s slst errvalue) is like the previous exercise, but it generates procedure compositions.
+
+```lisp
+> (car&cdr2 'a '(a b c) 'fail)
+car
+> (car&cdr2 'c '(a b c) 'fail)
+(compose car (compose cdr cdr))
+> (car&cdr2 'dog '(cat lion (fish dog) pig) 'fail)
+(compose car (compose cdr (compose car (compose cdr cdr))))
+> (car&cdr2 'a '(b c) 'fail)
+fail
+```
+
+4. (compose p1 ... pn), where p1,...pn is a sequence of zero or more procedures of one argument, returns the composition of all the procedures. The composition of zero procedures is the identity procedure, the composition of one procedure is the procedure itself, and the composition of two or more procedures is specified by this equation:
+
+$$
+((compose \space p1 \space p2 \space \dotso) \space x) \rArr (p1 \space ((compose (p2 \space ...) \space x))
+$$
+
+```lisp
+> ((compose '(a b c d)))
+(a b c d)
+> ((compose car) '(a b c d))
+a
+> ((compose car cdr cdr ) '(a b c d))
+c
+```
+
+5. (sort lon) returns a list of the elements of *lon* in increasing order.
+```lisp
+> (sort '(8 2 5 2 3))
+(2 2 3 5 8)
+```
+
+6. (sort predicate lon) returns a list of elements determined by the predicate.
+```lisp
+> (sort < '(8 2 5 2 3))
+(2 2 3 5 8)
+> (sort > '(8 2 5 2 3))
+(8 5 3 2 2)
+```
+
+## 2.3 Static Properties of Variables
+Those properties of a program that can be determined by analyzing the text of a program are said to be *static*, as opposed to the *dynamic* properties that are determined by run-time inputs. It is important to determine if a property is static, because static properties can be analyzed by a compiler to detect errors before run time and to improve the efficientcy of object code.
+
+$\quad$ In Scheme, as in most other languages, the relation between a variable reference and the formal parameter to which it refers is a static property. In this section we focus on this relation and some of its important consequences. 
+
+### 2.3.1 Free and Bound Variables
+In order to foucs on varialbe binding with a minimum of distraction, we initially study it in the most abstract context possible. For this purpose we introduce a language that has only variable references, *lambda* expressions with a single formal parameter, and procedure calls.
+
+$$
+\begin{aligned}
+\langle exp \rangle ::= &\langle varref \rangle \\
+ &| (lambda (\langle var \rangle) \langle exp \rangle) \\
+ &| (\langle exp \rangle \space \langle exp \rangle)
+\end{aligned}
+$$
+
+This language is called the *lambda calculus.
 
