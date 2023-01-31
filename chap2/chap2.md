@@ -879,5 +879,18 @@ $$
 \end{aligned}
 $$
 
-This language is called the *lambda calculus.
+This language is called the *lambda calculus. Although quite concise, its concepts generalize easily to most programming languages. For these reasons, the lambda calculus is the formal basis for much of the theory of programming languages.
+
+$\quad$ The traditional syntax for procedures in the lambda calculus uses the Greek letter $\lambda$ (lambda), replacing the second alternative in the above grammar with 
+$$
+\lambda \langle var \rangle . \langle exp \rangle
+$$
+We use the keyword **lambda** and the extra parentheses so that these expressions look like Scheme expressions. Furthermore, since elements of $\langle exp \rangle$ are lists, it is convenient to write porgrams that manipulate them.
+
+$\quad$ A variable reference is said to be *bound* in an expression if it refers to a formal parameter introduced in the expression. A reference that is not bound to a formal parameter in the expression is said to be *free*. Thus in 
+
+$$
+((lambda (x) \space x) \space y) \space  \tag{*}
+$$
+the reference to x is bound and the reference to y is free. A variable is said to *occur bound* in an expression if the expression contains a bound reference to the varialbe. Similaryly, a variable is said to *occur free* in an expression if the expression contains a free reference to the variable.
 
