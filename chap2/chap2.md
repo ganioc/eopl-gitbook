@@ -746,6 +746,7 @@ fail
 ```
 
 $\bull$ Exercise 2.2.8
+
 These are a bit harder.
 
 1. (down lst) wraps parentheses around each top-level element of *lst*.
@@ -893,4 +894,64 @@ $$
 ((lambda (x) \space x) \space y) \space  \tag{*}
 $$
 the reference to x is bound and the reference to y is free. A variable is said to *occur bound* in an expression if the expression contains a bound reference to the varialbe. Similaryly, a variable is said to *occur free* in an expression if the expression contains a free reference to the variable.
+
+$\quad$ All variable references must have some associated value when they are evaluated at run time. If they are bound to a formal parameter, they are said to be *lexically bound*. Otherwise , they must either be bound at top level by definitions or be supplied by the system. In this case, they are said to be *globally bound*. It is an error to refernce a variable that is neither lexically nor globally bound.
+
+$\quad$ The value of an expression depends only on the value associated with the variables that occur free within the expression. The context that surrounds the expression must provide these values. For example, the value of $(*)$ depends on the value of the free variable y. If $(*)$ were embeded in the body of a lambda expression with formal parameter y, as in 
+$$
+(lambda (y) \space ((lambda(x) \space x) \space y)) \space  \tag{**}
+$$
+then the binding of this parameter would provide the value for the reference to variable y. Thus a variable reference that is free in one context, such as $(*)$ , may be bound in a larger surrounding context, such as $(**)$.
+
+$\quad$ The value of an expression is independent of binding for variables that do not occur free in the expression. For example, the value of $(*)$ is independent of any bindings that might exist for x at the time that $(*)$ is evaluated. By the time the free occurrence of x in the body of $(lambda (x) \space x)$ is evaluated, it will have a new binding (in $(*)$, the value associated with y).
+
+$\quad$ The meaning of $(lambda(x) \space x)$ is always the same: it is the identity function that returns whatever value it is passed. Other lambda expression without free variables also have fixed meanings. For example, the value of
+
+```lisp
+(lambda (f)
+    (lambda (x)
+        (f x)))
+```
+is a procedure that takes a procedure *f*, and returns a procedure that takes a value *x*, applies *f* to it, and returns the result. Lambda expressions without free variables are called *combinators*. A few combinators, such as the identity function and the above application combinator, are useful programming tools. We shall use more elaborate combinators in the procedural representation of data types, beginning in section 3.6.
+
+$\quad$ Free and bound occurrences may be defined formally as follows:
+
+A variable x *occurs free* in an expression E if and only if
+
+1. E is a variable reference and E is the same as x; or
+2. E is of the form (E1 E2) and x occurs free in $E_1$ or $E_2$; or
+3. E is of the form (lambda (y) $E^{'}$), where *y* is different from x and x occurs free in $E^{'}$.
+
+A variable x *occurs bound* in an expression E if and only if
+
+1. E is of the form (E1 E2) and x occurs bound in $E_1$ or $E_2$; or
+2. E is of the form (lambda (y) $E^{'}$), where x occurs bound in $E^{'}$ or x and y are the same variable and y occurs free in $E^{'}$.
+
+No variable occurs bound in an expression consisting of just a single variable.
+
+$\bull$ Exercise 2.3.1
+Write a procedure *free-vars* that takes a list structure representing an expression in the lambda calculus syntax given above and returns a set, a list without duplicates, of all the variables that occur free in the expression. Similarly, write a procedure *bound-vars* that returns a set of all the variables that occur bound in its argument.
+
+$\quad$ Hint: The definitions of occurs free and occurs bound are recursive and based on the structure of an expression. Your program should have a similar structure. $\square$
+
+$\bull$ Exercise 2.3.3
+
+Give an example of a lambda calculus expression in which the same variable occurs both bound and free. $\square$
+
+$\bull$ Exercise 2.3.4
+
+Give an example of a lambda calculus expression in which a variable occurs free but which has a value that is independent of the value of the free variable. $\square$
+
+$\circ$ Exercise 2.3.5
+
+Scheme **lambda** expression may have any number of formal parameters, and Scheme procedure calls may have any number of operands. Modify the definitions of occurs free and occurs bound to allow **lambda** expressions with any number of formal parameters and procedure calls with any number of operands. $\square$
+
+$\circ$ Exercise 2.3.6
+Extend the formal definitions of occurs free and occurs bound to include if expressions. $\square$
+
+$\circ$ Exercise 2.3.7
+What effect does quote have on the set of free and bound variables? $\square$
+
+### 2.3.2 Scope and Lexical Address
+
 

@@ -11,5 +11,8 @@ $$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
 $$\left( \sum{k=1}^n a_k b_k \right)^2 \leq \left( \sum{k=1}^n ak^2 \right) \left( \sum{k=1}^n b_k^2 \right)$$
 
 
+## solutions
+https://efanzh.org/2017/08/06/essentials-of-programming-languages-exercises.html
+
 
 
