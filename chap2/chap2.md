@@ -930,9 +930,11 @@ A variable x *occurs bound* in an expression E if and only if
 No variable occurs bound in an expression consisting of just a single variable.
 
 $\bull$ Exercise 2.3.1
+
 Write a procedure *free-vars* that takes a list structure representing an expression in the lambda calculus syntax given above and returns a set, a list without duplicates, of all the variables that occur free in the expression. Similarly, write a procedure *bound-vars* that returns a set of all the variables that occur bound in its argument.
 
 $\quad$ Hint: The definitions of occurs free and occurs bound are recursive and based on the structure of an expression. Your program should have a similar structure. $\square$
+
 
 $\bull$ Exercise 2.3.3
 
