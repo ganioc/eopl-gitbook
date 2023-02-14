@@ -273,11 +273,29 @@ C-h C-a, Emacs的帮助页面,
 
 Ctrl-Tab, switch tabs in Windows Terminal,
 
+我发现理解第2章的一些习题还是有点困难的，所以我打算把第2版、第3版的书也看一下。这样我将同时查看3个版本的书。
 
+## 
+rule of inference,
 
+hypothesis, antecedent,
 
+conclusion, consequent,
 
+axim, rule with no hypotheses,
 
+Recursively Specified Data,
+
+grammars: 
+
+* Nonterminal Symbols, syntactic categories,
+  Expression is a nonterminal, 
+  Backus-Naur Form, BNF, to surround the word with angle brackets,
+* Terminal Symbols, external representation, ., (, ),
+* Productions, rules,
+  left-hand side, right-hand side, 包含了terminal和nonterminal symbols. separated by symbol ::= , is can be, 
+
+V3->page 31, V2->page 27
 
 
 
