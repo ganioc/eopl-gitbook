@@ -332,3 +332,9 @@ predicate: 谓语，
 2. recursive calls employed at points where recursion is used in the set's inductive definition
 
 ver2-> p37, ver3-> p31,
+
+mutually recursive,
+
+think about one syntactic category at a time,
+
+ver2->p42
