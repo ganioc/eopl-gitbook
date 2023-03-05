@@ -338,3 +338,59 @@ mutually recursive,
 think about one syntactic category at a time,
 
 ver2->p42
+
+Distinguish the s-list , the depth of a symbol.
+
+```
+<top-level> ::= <s-list>
+<s-list>    ::= ()
+            ::= (<symbol-expression> . <s-list>)
+<symbol-expression> ::= <symbol> | <s-list>
+
+```
+
+We will have 3 procedures:
+
+```
+notate-depth,
+notate-depth-in-s-list,
+notate-depth-in-symbol-expression,
+```
+
+技巧:  用传参的方法来访问方法所在的上下文。 并称为inherited attributes.
+
+### 1.2.3 Other Patterns of Recursion
+
+其它的递归方法。有些时候输入数据的语法并不能提供足够的数据结构。比如我们考虑问题, 将一个矢量里的所有值加在一起。
+
+## 1.3 Scoping and Binding of Variables
+
+定义: references, declarations, 引用， 定义。
+
+binding rules: 变量定义的作用域。任何编程语言都要解决这个问题，也就是上下文。a static property. Analyzing the text of a program alone, without knowing the actual values to which the variable is bound. Statically scoped. In some languages, 变量定义不会被确定，直到程序执行的恶时候，这个属性叫做动态绑定，作用域。
+
+定义Expression的语法:
+
+```
+<expression> ::= <identifier>
+              ::= (lambda (<identifier>) <expression>)
+              ::= (<expression> <expression>)
+```
+
+绑定规则的定义, lambda calculus表达式,
+
+identifier是一个定义， 将expression里的所有variable绑定，除非有一些同样的变量名的定义。
+
+identity function is the binding scope of x, (lambda (x) x),
+
+combinators,  lambda calculus expressions without free variables, (combinators are useful programming tools.)
+
+### 1.3.2 Scope and Lexical Address
+
+下一个问题是要讨论如何将变量的引用和变量的定义联系起来。反过来的问题是，给定一定义，如何判断哪些引用与之联系。
+
+block-structured language, blocks, regions. The inner declaration takes precedence over the outer one. Lexical binding. 词法的,
+
+contours, borders of regions. lexical (static) depth of the variable reference.
+
+ver2/57, ver3/p31

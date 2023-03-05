@@ -1,0 +1,22 @@
+Chez Scheme Version 9.5.8
+Copyright 1984-2022 Cisco Systems, Inc.
+
+> (message "hi")
+
+Exception: variable message is not bound
+Type (debug) to enter the debugger.
+> (printf "hi")
+hi> 
+#f
+> 
+#f
+> 
+#f
+> 
+#f
+> (printf "hi\n")
+hi
+> (hello-proc)
+Hi friend!
+> (load "~/Documents/yangjun/books/reading-books/eopl-gitbook/chap1/exec_chap1.scm")
+> 

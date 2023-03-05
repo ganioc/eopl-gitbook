@@ -1,6 +1,7 @@
 ;; A test program, test.scm
 ;;
-;;
+
+(define y 200)
 
 (+ 1 2340)
 
