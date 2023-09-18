@@ -296,7 +296,46 @@ a)\space  \text{S} \to \quad \text{+} \space \text{S} \space \text{S} \mid - \te
 b) \space \text{S} \to \quad \text{S} \space ( \space  \text{S} \space ) \space \text{S} \mid \epsilon \hspace{50cm} \\
 c) \space \text{S} \to \quad 0 \space \text{S} \space 1 \mid 0 \space 1 \hspace{50cm} \\
 $$
-
+o3.
 添加一个简单的Makefile文件，对一些例子进行方便的编译. 发现使用CMake还是比用Make要方便很多。
+
+### 2.4.3 When to use $\epsilon \text{-Production}$ 
+$\epsilon$ production is to do nothing
+
+$$
+
+optexpr \to expr | \epsilon
+$$
+
+
+### 2.4.4 Designing a Predictive Parser
+我们可以将Section 2.4.2部分引入的技术，通用化，使之适合一般情况, 符合任意的语法，disjoint FIRST sets, 不想连的First集合, production bodies, 推导, 属于任意nonterminal的推导。
+
+我们也可以看到，当我们有一个translation scheme, 翻译方案$-$时, 拥有嵌入action的语法，$-$此时可以执行这些action,作为parser的视线的一部分过程。
+
+回忆，我们曾经说过，预测型分析器, $predictive \space parser$,为每一个nonterminal, 非终止符号，都包含一个可运行的过程函数。非终止符号A的执行过程做2件事情:
+
+1. 执行过程判断使用哪一个$A$-production，通过检查lookahead symbol,预测符号。如果预测符号在$FIRST(\alpha)$内的话， 就选择带有body $\alpha$ 的production, 推导。如果对预测符号，存在两个非空的body,主体，的话, 我们就无法使用这种解析方法，预测型分析。所以我们这里能够使用得，只能是一个预测符号对应一个推导主体。另外，A的$\epsilon$-推导,如果存在的话，在预测符号并不存在任何的FIRST集合的话，A的推导主体。$\epsilon$-推导将被使用。
+2. 然后执行过程会模仿选择的推导主体。主体的符号将从左到右，依次执行。Nonterminal会执行Nonterminal的执行过程, 与预测符号匹配的terminal,终止符号将读取下一个输入符号。如果主体的终止符号在某一中间过程中不匹配预测符号的话，将触发一个句法错误，syntax error。
+
+正如扩展语法时使用translation scheme, 翻译方案, 句法directed translator可以通过扩展预测型解析器。
+
+下述的有限的操作就可以满足要求:
+1. 构造一个预测型解析器，忽略推导中的行为，actions,
+2. 将translation scheme,翻译方案中的行为拷贝到解析器中, 如果一个action出现在推导$p$的语法符号$X$后的话，action拷贝到$p$的代码的$X$的实现之后。如果action出现在推导之前的话，action拷贝到推导主体的代码之前。
+
+我们将会在Section 2.5部分构造这样的转换器。
+
+### 2.4.5 Left Recursion,左递归
+我们可以构造一个递归下降的解析器，永远向下执行下去。左递归推导会产生一个问题:
+
+$$
+expr \to expr + term
+$$
+在上式中, 主体的最左符号和推导的头部的非终止符号相等。
+
+
+
+
 
 
