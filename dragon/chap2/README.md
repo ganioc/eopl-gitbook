@@ -333,9 +333,31 @@ $$
 expr \to expr + term
 $$
 在上式中, 主体的最左符号和推导的头部的非终止符号相等。
+一直循环下去，直到a terminal is matched. 
 
+Consider a nonterminal $A$ with 2 productions
+$$
+A \to A\alpha | \beta \\
+$$
+$\alpha$ 和 $\beta$ 是sequences of terminals and nonterminals that do not start with $A$. 例如:
+$$
+expr \to expr + term | term \\
+$$
+nonterminal $A=expr$, string $\alpha = + term$, and string $\beta=term$
 
+nonterminal $A$ 和它的 production 为left recursive的, 左递归的。反复执行的话，会在$A$的右边产生一系列的$\alpah$. 当最终$A$被$\beta$所代替时，我们得到一组$\alpha$, 前面是一个$\beta$值。
+可以改写为
+$$
+A \to \beta R \\
+R \to \alpha R | \epsilon \\
+$$
+$R$是右递归的， right recursive, has $R$ itself as the last symbol on the right side. 
 
+### 2.4.6 作业
+Exercise 2.4.1: Construct recursive-descent parsers, starting with the following grammars: 语法:
 
+a) $S \to +SS | -SS|a$
 
+b) $S \to S(S)S | \epsilon$
 
+c) $S \to 0 S 1 | 0 1$
