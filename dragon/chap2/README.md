@@ -7,6 +7,26 @@ Purple book, < Compilers: Principles, Techniques and Tools >
 
 https://github.com/fool2fish/dragon-book-exercise-answers 
 
+# chap 2 A simple Syntax-Directed Translator
+句法指引的翻译器
+
+Context-free grammars or BNF(Backus-Naur Form)
+
+infix expressions to postfix form,(操作符在操作数之后)
+
+context-free grammar, 语法,
+
+## 2.2 Syntax Definition
+$$
+stmt \to \textbf{if} (expr) \text{stmt}  \space \textbf{else} \space stmt
+$$
+$\to$ 被称为"can have the form", 可以有形式,叫做production,
+有些符号是terminals, 结束符, if,parentheses
+有些符号是nonterminals, 非结束符，比如变量expr, 和stmt,
+
+### 2.2.1 语法的定义
+
+
 
 ### 2.2.5 习题
 
