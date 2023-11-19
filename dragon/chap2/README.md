@@ -25,6 +25,22 @@ $\to$ 被称为"can have the form", 可以有形式,叫做production,
 有些符号是nonterminals, 非结束符，比如变量expr, 和stmt,
 
 ### 2.2.1 语法的定义
+**四则运算的语法，productions,产生式**
+$$
+\begin{aligned}
+expr  \to & expr + term \\
+       & | expr - term \\
+       & | term \\
+\\
+term \to & term * factor \\
+        & | term / factor \\
+        & | factor \\
+\\
+factor \to & digit | (expr) \\
+\end{aligned}
+$$
+
+### 习题 2.2.1
 
 
 
@@ -71,7 +87,7 @@ digit    -> smallDigit | I V | V smallDigit | I X
 smallDigit ->  I | II | III | ε
 
 ```
-### 2.3.3 简单句法指导的定义
+### 2.3.3 简单句法指导的翻译
 #### 名词解释:
 
 ```shell
