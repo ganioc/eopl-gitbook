@@ -83,3 +83,9 @@ Infinity, -Infinity
 NaN, Not a number, 
 
 ID: _$开始， 长度为128字符, 
+
+## 3.5 lexical analyzer
+flex, yacc is in bison,
+
+
+
