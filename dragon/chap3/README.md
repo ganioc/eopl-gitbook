@@ -87,5 +87,43 @@ ID: _$开始， 长度为128字符,
 ## 3.5 lexical analyzer
 flex, yacc is in bison,
 
+Lex language, 作为输入，
+Lex compiler, 进行变异，将输入的Patterns转换为一个transition diagram， 生成代码, lex.yy.c, 来模拟这种状态转移表。生成a stream of tokens. 
 
+token的name, attribute value, 
+
+```flex
+declarations (定义variables, manifest constants常量，如token的名称, 正则定义)
+%%
+translation rules，(Pattern { Action })
+%%
+auxiliary functions, 可以被lexical analyzer调用,
+```
+工作原理:
+Lexical analyzer是被parser调用的。parser调用lexcial analyzer读入，一个字符一次，直到找到input的prefix是满足匹配Pattern, $P_i$. 然后执行后面的动作$A_i$, $A_i$会返回Parser. Lexcial analyzer会返回一个value, token name, 给parser, 使用共享的整数值$yylval$来将找到的lexeme信息返回给parser。
+
+yylval
+yytext
+yyleng
+
+installID(), 将找到的lexeme放在symbol table中;
+这个函数返回一个指针到symbol table, 放在全局变量yylval中, 可以被parser, 后面的compiler部分使用。Lex还会生成另外两个变量
+(a) yytext, 指向lexeme的开始部分, 类似于lexemeBegin, 
+(b) yyleng, 是找到的lexeme的长度,
+token name ID 会返回给parser,
+
+installNum(), 将以类似的方式返回pattern number,
+
+### 3.5.3 Lex如何解决冲突问题
+
+2条规则, 选择哪一个lexeme呢?
+
+1. 选择更长的prefix
+2. 选择最先出现的那个pattern
+
+### 3.5.4 Lookahead Operator
+
+提前操作符， 
+
+. -> any string without a newline;
 
