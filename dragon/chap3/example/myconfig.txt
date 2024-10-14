@@ -1,0 +1,4 @@
+[myConfig]
+widget=True
+[Message]
+name=yango
