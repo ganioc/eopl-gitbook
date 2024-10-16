@@ -1,0 +1,209 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/mnt/toshi/project/eopl-gitbook/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+ABS	dragon/chap3/example/calc/calculator.tab.h	/^    ABS = 263,                     \/* ABS  *\/$/;"	e	enum:yytokentype
+ADD	dragon/chap3/example/calc/calculator.tab.h	/^    ADD = 259,                     \/* ADD  *\/$/;"	e	enum:yytokentype
+CP	dragon/chap3/example/calc/calculator.tab.h	/^    CP = 266                       \/* CP  *\/$/;"	e	enum:yytokentype
+DIV	dragon/chap3/example/calc/calculator.tab.h	/^    DIV = 262,                     \/* DIV  *\/$/;"	e	enum:yytokentype
+EOL	dragon/chap3/example/calc/calculator.tab.h	/^    EOL = 264,                     \/* EOL  *\/$/;"	e	enum:yytokentype
+EXIT_SUCCESS	dragon/chap3/example/calc/calculator.tab.c	/^#      define EXIT_SUCCESS /;"	d	file:
+EXIT_SUCCESS	dragon/chap3/example/calc/calculator.tab.c	/^#    define EXIT_SUCCESS /;"	d	file:
+MUL	dragon/chap3/example/calc/calculator.tab.h	/^    MUL = 261,                     \/* MUL  *\/$/;"	e	enum:yytokentype
+NUMBER	dragon/chap3/example/calc/calculator.tab.h	/^    NUMBER = 258,                  \/* NUMBER  *\/$/;"	e	enum:yytokentype
+OP	dragon/chap3/example/calc/calculator.tab.h	/^    OP = 265,                      \/* OP  *\/$/;"	e	enum:yytokentype
+SUB	dragon/chap3/example/calc/calculator.tab.h	/^    SUB = 260,                     \/* SUB  *\/$/;"	e	enum:yytokentype
+UINT_LEAST16_MAX	dragon/chap3/example/calc/calculator.tab.c	/^# define UINT_LEAST16_MAX /;"	d	file:
+UINT_LEAST8_MAX	dragon/chap3/example/calc/calculator.tab.c	/^# define UINT_LEAST8_MAX /;"	d	file:
+YYABORT	dragon/chap3/example/calc/calculator.tab.c	/^#define YYABORT /;"	d	file:
+YYACCEPT	dragon/chap3/example/calc/calculator.tab.c	/^#define YYACCEPT /;"	d	file:
+YYBACKUP	dragon/chap3/example/calc/calculator.tab.c	/^#define YYBACKUP(/;"	d	file:
+YYBISON	dragon/chap3/example/calc/calculator.tab.c	/^#define YYBISON /;"	d	file:
+YYBISON_VERSION	dragon/chap3/example/calc/calculator.tab.c	/^#define YYBISON_VERSION /;"	d	file:
+YYCOPY	dragon/chap3/example/calc/calculator.tab.c	/^#   define YYCOPY(/;"	d	file:
+YYCOPY_NEEDED	dragon/chap3/example/calc/calculator.tab.c	/^# define YYCOPY_NEEDED /;"	d	file:
+YYDEBUG	dragon/chap3/example/calc/calculator.tab.h	/^# define YYDEBUG /;"	d
+YYDPRINTF	dragon/chap3/example/calc/calculator.tab.c	/^# define YYDPRINTF(/;"	d	file:
+YYEMPTY	dragon/chap3/example/calc/calculator.tab.h	/^    YYEMPTY = -2,$/;"	e	enum:yytokentype
+YYENOMEM	dragon/chap3/example/calc/calculator.tab.c	/^enum { YYENOMEM = -2 };$/;"	e	enum:__anonf11e628a0103	file:
+YYEOF	dragon/chap3/example/calc/calculator.tab.h	/^    YYEOF = 0,                     \/* "end of file"  *\/$/;"	e	enum:yytokentype
+YYERRCODE	dragon/chap3/example/calc/calculator.tab.c	/^#define YYERRCODE /;"	d	file:
+YYERROR	dragon/chap3/example/calc/calculator.tab.c	/^#define YYERROR /;"	d	file:
+YYFINAL	dragon/chap3/example/calc/calculator.tab.c	/^#define YYFINAL /;"	d	file:
+YYFPRINTF	dragon/chap3/example/calc/calculator.tab.c	/^#  define YYFPRINTF /;"	d	file:
+YYFREE	dragon/chap3/example/calc/calculator.tab.c	/^#   define YYFREE /;"	d	file:
+YYINITDEPTH	dragon/chap3/example/calc/calculator.tab.c	/^# define YYINITDEPTH /;"	d	file:
+YYLAST	dragon/chap3/example/calc/calculator.tab.c	/^#define YYLAST /;"	d	file:
+YYMALLOC	dragon/chap3/example/calc/calculator.tab.c	/^#   define YYMALLOC /;"	d	file:
+YYMAXDEPTH	dragon/chap3/example/calc/calculator.tab.c	/^# define YYMAXDEPTH /;"	d	file:
+YYMAXUTOK	dragon/chap3/example/calc/calculator.tab.c	/^#define YYMAXUTOK /;"	d	file:
+YYNNTS	dragon/chap3/example/calc/calculator.tab.c	/^#define YYNNTS /;"	d	file:
+YYNOMEM	dragon/chap3/example/calc/calculator.tab.c	/^#define YYNOMEM /;"	d	file:
+YYNRULES	dragon/chap3/example/calc/calculator.tab.c	/^#define YYNRULES /;"	d	file:
+YYNSTATES	dragon/chap3/example/calc/calculator.tab.c	/^#define YYNSTATES /;"	d	file:
+YYNTOKENS	dragon/chap3/example/calc/calculator.tab.c	/^#define YYNTOKENS /;"	d	file:
+YYPACT_NINF	dragon/chap3/example/calc/calculator.tab.c	/^#define YYPACT_NINF /;"	d	file:
+YYPOPSTACK	dragon/chap3/example/calc/calculator.tab.c	/^#define YYPOPSTACK(/;"	d	file:
+YYPTRDIFF_MAXIMUM	dragon/chap3/example/calc/calculator.tab.c	/^#  define YYPTRDIFF_MAXIMUM /;"	d	file:
+YYPTRDIFF_T	dragon/chap3/example/calc/calculator.tab.c	/^#  define YYPTRDIFF_T /;"	d	file:
+YYPULL	dragon/chap3/example/calc/calculator.tab.c	/^#define YYPULL /;"	d	file:
+YYPURE	dragon/chap3/example/calc/calculator.tab.c	/^#define YYPURE /;"	d	file:
+YYPUSH	dragon/chap3/example/calc/calculator.tab.c	/^#define YYPUSH /;"	d	file:
+YYRECOVERING	dragon/chap3/example/calc/calculator.tab.c	/^#define YYRECOVERING(/;"	d	file:
+YYSIZEOF	dragon/chap3/example/calc/calculator.tab.c	/^#define YYSIZEOF(/;"	d	file:
+YYSIZE_MAXIMUM	dragon/chap3/example/calc/calculator.tab.c	/^#define YYSIZE_MAXIMUM /;"	d	file:
+YYSIZE_T	dragon/chap3/example/calc/calculator.tab.c	/^#  define YYSIZE_T /;"	d	file:
+YYSKELETON_NAME	dragon/chap3/example/calc/calculator.tab.c	/^#define YYSKELETON_NAME /;"	d	file:
+YYSTACK_ALLOC	dragon/chap3/example/calc/calculator.tab.c	/^#    define YYSTACK_ALLOC /;"	d	file:
+YYSTACK_ALLOC	dragon/chap3/example/calc/calculator.tab.c	/^#  define YYSTACK_ALLOC /;"	d	file:
+YYSTACK_ALLOC_MAXIMUM	dragon/chap3/example/calc/calculator.tab.c	/^#   define YYSTACK_ALLOC_MAXIMUM /;"	d	file:
+YYSTACK_BYTES	dragon/chap3/example/calc/calculator.tab.c	/^# define YYSTACK_BYTES(/;"	d	file:
+YYSTACK_FREE	dragon/chap3/example/calc/calculator.tab.c	/^#  define YYSTACK_FREE /;"	d	file:
+YYSTACK_FREE	dragon/chap3/example/calc/calculator.tab.c	/^#  define YYSTACK_FREE(/;"	d	file:
+YYSTACK_GAP_MAXIMUM	dragon/chap3/example/calc/calculator.tab.c	/^# define YYSTACK_GAP_MAXIMUM /;"	d	file:
+YYSTACK_RELOCATE	dragon/chap3/example/calc/calculator.tab.c	/^# define YYSTACK_RELOCATE(/;"	d	file:
+YYSTYPE	dragon/chap3/example/calc/calculator.tab.h	/^typedef int YYSTYPE;$/;"	t	typeref:typename:int
+YYSTYPE_IS_DECLARED	dragon/chap3/example/calc/calculator.tab.h	/^# define YYSTYPE_IS_DECLARED /;"	d
+YYSTYPE_IS_TRIVIAL	dragon/chap3/example/calc/calculator.tab.h	/^# define YYSTYPE_IS_TRIVIAL /;"	d
+YYSYMBOL_ABS	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_ABS = 8,                        \/* ABS  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_ADD	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_ADD = 4,                        \/* ADD  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_CP	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_CP = 11,                        \/* CP  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_DIV	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_DIV = 7,                        \/* DIV  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_EOL	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_EOL = 9,                        \/* EOL  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_MUL	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_MUL = 6,                        \/* MUL  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_NUMBER	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_NUMBER = 3,                     \/* NUMBER  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_OP	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_OP = 10,                        \/* OP  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_SUB	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_SUB = 5,                        \/* SUB  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_YYACCEPT	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_YYACCEPT = 12,                  \/* $accept  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_YYEMPTY	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_YYEMPTY = -2,$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_YYEOF	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_YYEOF = 0,                      \/* "end of file"  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_YYUNDEF	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_YYUNDEF = 2,                    \/* "invalid token"  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_YYerror	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_YYerror = 1,                    \/* error  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_calclist	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_calclist = 13,                  \/* calclist  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_exp	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_exp = 14,                       \/* exp  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_factor	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_factor = 15,                    \/* factor  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYSYMBOL_term	dragon/chap3/example/calc/calculator.tab.c	/^  YYSYMBOL_term = 16                       \/* term  *\/$/;"	e	enum:yysymbol_kind_t	file:
+YYTABLE_NINF	dragon/chap3/example/calc/calculator.tab.c	/^#define YYTABLE_NINF /;"	d	file:
+YYTOKENTYPE	dragon/chap3/example/calc/calculator.tab.h	/^# define YYTOKENTYPE$/;"	d
+YYTRANSLATE	dragon/chap3/example/calc/calculator.tab.c	/^#define YYTRANSLATE(/;"	d	file:
+YYUNDEF	dragon/chap3/example/calc/calculator.tab.h	/^    YYUNDEF = 257,                 \/* "invalid token"  *\/$/;"	e	enum:yytokentype
+YY_	dragon/chap3/example/calc/calculator.tab.c	/^#   define YY_(/;"	d	file:
+YY_	dragon/chap3/example/calc/calculator.tab.c	/^#  define YY_(/;"	d	file:
+YY_ACCESSING_SYMBOL	dragon/chap3/example/calc/calculator.tab.c	/^#define YY_ACCESSING_SYMBOL(/;"	d	file:
+YY_ASSERT	dragon/chap3/example/calc/calculator.tab.c	/^#define YY_ASSERT(/;"	d	file:
+YY_ATTRIBUTE_PURE	dragon/chap3/example/calc/calculator.tab.c	/^#  define YY_ATTRIBUTE_PURE /;"	d	file:
+YY_ATTRIBUTE_PURE	dragon/chap3/example/calc/calculator.tab.c	/^#  define YY_ATTRIBUTE_PURE$/;"	d	file:
+YY_ATTRIBUTE_UNUSED	dragon/chap3/example/calc/calculator.tab.c	/^#  define YY_ATTRIBUTE_UNUSED /;"	d	file:
+YY_ATTRIBUTE_UNUSED	dragon/chap3/example/calc/calculator.tab.c	/^#  define YY_ATTRIBUTE_UNUSED$/;"	d	file:
+YY_CAST	dragon/chap3/example/calc/calculator.tab.c	/^#   define YY_CAST(/;"	d	file:
+YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN	dragon/chap3/example/calc/calculator.tab.c	/^#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN /;"	d	file:
+YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN$/;"	d	file:
+YY_IGNORE_MAYBE_UNINITIALIZED_END	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_IGNORE_MAYBE_UNINITIALIZED_END /;"	d	file:
+YY_IGNORE_MAYBE_UNINITIALIZED_END	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_IGNORE_MAYBE_UNINITIALIZED_END$/;"	d	file:
+YY_IGNORE_USELESS_CAST_BEGIN	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_IGNORE_USELESS_CAST_BEGIN /;"	d	file:
+YY_IGNORE_USELESS_CAST_BEGIN	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_IGNORE_USELESS_CAST_BEGIN$/;"	d	file:
+YY_IGNORE_USELESS_CAST_END	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_IGNORE_USELESS_CAST_END /;"	d	file:
+YY_IGNORE_USELESS_CAST_END	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_IGNORE_USELESS_CAST_END$/;"	d	file:
+YY_INITIAL_VALUE	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_INITIAL_VALUE(/;"	d	file:
+YY_NULLPTR	dragon/chap3/example/calc/calculator.tab.c	/^#    define YY_NULLPTR /;"	d	file:
+YY_NULLPTR	dragon/chap3/example/calc/calculator.tab.c	/^#   define YY_NULLPTR /;"	d	file:
+YY_REDUCE_PRINT	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_REDUCE_PRINT(/;"	d	file:
+YY_REINTERPRET_CAST	dragon/chap3/example/calc/calculator.tab.c	/^#   define YY_REINTERPRET_CAST(/;"	d	file:
+YY_STACK_PRINT	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_STACK_PRINT(/;"	d	file:
+YY_STDINT_H	dragon/chap3/example/calc/calculator.tab.c	/^#  define YY_STDINT_H$/;"	d	file:
+YY_SYMBOL_PRINT	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_SYMBOL_PRINT(/;"	d	file:
+YY_USE	dragon/chap3/example/calc/calculator.tab.c	/^# define YY_USE(/;"	d	file:
+YY_YY_CALCULATOR_TAB_H_INCLUDED	dragon/chap3/example/calc/calculator.tab.h	/^# define YY_YY_CALCULATOR_TAB_H_INCLUDED$/;"	d
+YYerror	dragon/chap3/example/calc/calculator.tab.h	/^    YYerror = 256,                 \/* error  *\/$/;"	e	enum:yytokentype
+__anonf11e628a0103	dragon/chap3/example/calc/calculator.tab.c	/^enum { YYENOMEM = -2 };$/;"	g	file:
+a.out	dragon/chap3/example/calc/Makefile	/^a.out: calculator.l calculator.y$/;"	t
+alloca	dragon/chap3/example/calc/calculator.tab.c	/^#    define alloca /;"	d	file:
+f	dragon-exer/ch07/7.2/7.2.6.c	/^int f(int x, int *py, int **ppz) {$/;"	f	typeref:typename:int
+gettoken	dragon-exer/ch02/2.4/2.4.1.1.c	/^int gettoken(void) {$/;"	f	typeref:typename:int
+gettoken	dragon-exer/ch02/2.4/2.4.1.2.c	/^int gettoken(void) {$/;"	f	typeref:typename:int
+gettoken	dragon-exer/ch02/2.4/2.4.1.3.c	/^int gettoken(void) {$/;"	f	typeref:typename:int
+gettoken	dragon/chap2/2.4.1.c	/^int gettoken(void){$/;"	f	typeref:typename:int
+gettoken	dragon/chap2/2.4.2.c	/^int gettoken(void){$/;"	f	typeref:typename:int
+gettoken	dragon/chap2/2.4.3.c	/^int gettoken(){$/;"	f	typeref:typename:int
+main	dragon-exer/ch02/2.4/2.4.1.1.c	/^int main(void) {$/;"	f	typeref:typename:int
+main	dragon-exer/ch02/2.4/2.4.1.2.c	/^int main(void) {$/;"	f	typeref:typename:int
+main	dragon-exer/ch02/2.4/2.4.1.3.c	/^int main(void) {$/;"	f	typeref:typename:int
+main	dragon-exer/ch07/7.2/7.2.6.c	/^int main() {$/;"	f	typeref:typename:int
+main	dragon/chap2/2.4.1.c	/^int main(){$/;"	f	typeref:typename:int
+main	dragon/chap2/2.4.2.c	/^int main(){$/;"	f	typeref:typename:int
+main	dragon/chap2/2.4.3.c	/^int main(){$/;"	f	typeref:typename:int
+main	dragon/chap3/example/calc/calculator.tab.c	/^void main(int argc, char **argv){$/;"	f	typeref:typename:void
+r	dragon-exer/ch02/2.4/2.4.1.2.c	/^void r(void) {$/;"	f	typeref:typename:void
+r	dragon-exer/ch02/2.4/2.4.1.3.c	/^void r(void) {$/;"	f	typeref:typename:void
+r	dragon/chap2/2.4.2.c	/^void r(void){$/;"	f	typeref:typename:void
+r	dragon/chap2/2.4.3.c	/^void r(void){$/;"	f	typeref:typename:void
+s	dragon-exer/ch02/2.4/2.4.1.1.c	/^void s(void) {$/;"	f	typeref:typename:void
+s	dragon-exer/ch02/2.4/2.4.1.2.c	/^void s(void) {$/;"	f	typeref:typename:void
+s	dragon-exer/ch02/2.4/2.4.1.3.c	/^void s(void) {$/;"	f	typeref:typename:void
+s	dragon/chap2/2.4.1.c	/^void s(void){$/;"	f	typeref:typename:void
+s	dragon/chap2/2.4.2.c	/^void s(void){$/;"	f	typeref:typename:void
+s	dragon/chap2/2.4.3.c	/^void s(void){$/;"	f	typeref:typename:void
+token	dragon-exer/ch02/2.4/2.4.1.1.c	/^int token;$/;"	v	typeref:typename:int
+token	dragon-exer/ch02/2.4/2.4.1.2.c	/^int token;$/;"	v	typeref:typename:int
+token	dragon-exer/ch02/2.4/2.4.1.3.c	/^int token;$/;"	v	typeref:typename:int
+token	dragon/chap2/2.4.1.c	/^int token;$/;"	v	typeref:typename:int
+token	dragon/chap2/2.4.2.c	/^int token;$/;"	v	typeref:typename:int
+token	dragon/chap2/2.4.3.c	/^int token;$/;"	v	typeref:typename:int
+yy_reduce_print	dragon/chap3/example/calc/calculator.tab.c	/^yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,$/;"	f	typeref:typename:void	file:
+yy_stack_print	dragon/chap3/example/calc/calculator.tab.c	/^yy_stack_print (yy_state_t *yybottom, yy_state_t *yytop)$/;"	f	typeref:typename:void	file:
+yy_state_fast_t	dragon/chap3/example/calc/calculator.tab.c	/^typedef int yy_state_fast_t;$/;"	t	typeref:typename:int	file:
+yy_state_t	dragon/chap3/example/calc/calculator.tab.c	/^typedef yytype_int8 yy_state_t;$/;"	t	typeref:typename:yytype_int8	file:
+yy_symbol_print	dragon/chap3/example/calc/calculator.tab.c	/^yy_symbol_print (FILE *yyo,$/;"	f	typeref:typename:void	file:
+yy_symbol_value_print	dragon/chap3/example/calc/calculator.tab.c	/^yy_symbol_value_print (FILE *yyo,$/;"	f	typeref:typename:void	file:
+yyalloc	dragon/chap3/example/calc/calculator.tab.c	/^union yyalloc$/;"	u	file:
+yychar	dragon/chap3/example/calc/calculator.tab.c	/^int yychar;$/;"	v	typeref:typename:int
+yycheck	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yycheck[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yyclearin	dragon/chap3/example/calc/calculator.tab.c	/^#define yyclearin /;"	d	file:
+yydebug	dragon/chap3/example/calc/calculator.tab.c	/^int yydebug;$/;"	v	typeref:typename:int
+yydefact	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yydefact[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yydefgoto	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yydefgoto[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yydestruct	dragon/chap3/example/calc/calculator.tab.c	/^yydestruct (const char *yymsg,$/;"	f	typeref:typename:void	file:
+yyerrok	dragon/chap3/example/calc/calculator.tab.c	/^#define yyerrok /;"	d	file:
+yyerror	dragon/chap3/example/calc/calculator.tab.c	/^void yyerror(char *s){$/;"	f	typeref:typename:void
+yylval	dragon/chap3/example/calc/calculator.tab.c	/^YYSTYPE yylval;$/;"	v	typeref:typename:YYSTYPE
+yynerrs	dragon/chap3/example/calc/calculator.tab.c	/^int yynerrs;$/;"	v	typeref:typename:int
+yypact	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yypact[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yypact_value_is_default	dragon/chap3/example/calc/calculator.tab.c	/^#define yypact_value_is_default(/;"	d	file:
+yyparse	dragon/chap3/example/calc/calculator.tab.c	/^yyparse (void)$/;"	f	typeref:typename:int
+yypgoto	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yypgoto[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yyr1	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yyr1[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yyr2	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yyr2[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yyrline	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yyrline[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yyss_alloc	dragon/chap3/example/calc/calculator.tab.c	/^  yy_state_t yyss_alloc;$/;"	m	union:yyalloc	typeref:typename:yy_state_t	file:
+yystos	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yystos[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yysymbol_kind_t	dragon/chap3/example/calc/calculator.tab.c	/^enum yysymbol_kind_t$/;"	g	file:
+yysymbol_kind_t	dragon/chap3/example/calc/calculator.tab.c	/^typedef enum yysymbol_kind_t yysymbol_kind_t;$/;"	t	typeref:enum:yysymbol_kind_t	file:
+yysymbol_name	dragon/chap3/example/calc/calculator.tab.c	/^yysymbol_name (yysymbol_kind_t yysymbol)$/;"	f	typeref:typename:const char *	file:
+yytable	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yytable[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yytable_value_is_error	dragon/chap3/example/calc/calculator.tab.c	/^#define yytable_value_is_error(/;"	d	file:
+yytname	dragon/chap3/example/calc/calculator.tab.c	/^static const char *const yytname[] =$/;"	v	typeref:typename:const char * const[]	file:
+yytoken_kind_t	dragon/chap3/example/calc/calculator.tab.h	/^  typedef enum yytokentype yytoken_kind_t;$/;"	t	typeref:enum:yytokentype
+yytokentype	dragon/chap3/example/calc/calculator.tab.h	/^  enum yytokentype$/;"	g
+yytranslate	dragon/chap3/example/calc/calculator.tab.c	/^static const yytype_int8 yytranslate[] =$/;"	v	typeref:typename:const yytype_int8[]	file:
+yytype_int16	dragon/chap3/example/calc/calculator.tab.c	/^typedef __INT_LEAST16_TYPE__ yytype_int16;$/;"	t	typeref:typename:__INT_LEAST16_TYPE__	file:
+yytype_int16	dragon/chap3/example/calc/calculator.tab.c	/^typedef int_least16_t yytype_int16;$/;"	t	typeref:typename:int_least16_t	file:
+yytype_int16	dragon/chap3/example/calc/calculator.tab.c	/^typedef short yytype_int16;$/;"	t	typeref:typename:short	file:
+yytype_int8	dragon/chap3/example/calc/calculator.tab.c	/^typedef __INT_LEAST8_TYPE__ yytype_int8;$/;"	t	typeref:typename:__INT_LEAST8_TYPE__	file:
+yytype_int8	dragon/chap3/example/calc/calculator.tab.c	/^typedef int_least8_t yytype_int8;$/;"	t	typeref:typename:int_least8_t	file:
+yytype_int8	dragon/chap3/example/calc/calculator.tab.c	/^typedef signed char yytype_int8;$/;"	t	typeref:typename:signed char	file:
+yytype_uint16	dragon/chap3/example/calc/calculator.tab.c	/^typedef __UINT_LEAST16_TYPE__ yytype_uint16;$/;"	t	typeref:typename:__UINT_LEAST16_TYPE__	file:
+yytype_uint16	dragon/chap3/example/calc/calculator.tab.c	/^typedef int yytype_uint16;$/;"	t	typeref:typename:int	file:
+yytype_uint16	dragon/chap3/example/calc/calculator.tab.c	/^typedef uint_least16_t yytype_uint16;$/;"	t	typeref:typename:uint_least16_t	file:
+yytype_uint16	dragon/chap3/example/calc/calculator.tab.c	/^typedef unsigned short yytype_uint16;$/;"	t	typeref:typename:unsigned short	file:
+yytype_uint8	dragon/chap3/example/calc/calculator.tab.c	/^typedef __UINT_LEAST8_TYPE__ yytype_uint8;$/;"	t	typeref:typename:__UINT_LEAST8_TYPE__	file:
+yytype_uint8	dragon/chap3/example/calc/calculator.tab.c	/^typedef short yytype_uint8;$/;"	t	typeref:typename:short	file:
+yytype_uint8	dragon/chap3/example/calc/calculator.tab.c	/^typedef uint_least8_t yytype_uint8;$/;"	t	typeref:typename:uint_least8_t	file:
+yytype_uint8	dragon/chap3/example/calc/calculator.tab.c	/^typedef unsigned char yytype_uint8;$/;"	t	typeref:typename:unsigned char	file:
+yyvs_alloc	dragon/chap3/example/calc/calculator.tab.c	/^  YYSTYPE yyvs_alloc;$/;"	m	union:yyalloc	typeref:typename:YYSTYPE	file:

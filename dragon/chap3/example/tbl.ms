@@ -27,9 +27,13 @@ Section Heading
 .bp 2
 
 .TS
-options ;
-format 
-format-continued.
-table
+center allbox tab(@);
+c l.
+box@Surround the table in a box
+doublebox@Surround the table in a double-lined box
+allbox@Put each cell in a box
+center@Center the table horizontally
+expand@Make the table as wide as possible
+tab(c)@Change the column delimiter from tab to c
 .TE
 

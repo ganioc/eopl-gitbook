@@ -2,4 +2,6 @@ lex.yy.c
 *.out
 *.pdf
 *~
+*.ps
+
 
