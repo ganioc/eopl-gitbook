@@ -5,9 +5,14 @@ sudo ./install-font.sh -n  -s -d -F NotoSansSC -f +R ./noto/NotoSansSC-Regular.t
 
 groff -me -Tpdf -Kutf8 -fNotoSansSC format.me > format.pdf
 
+groff -ms -Tpdf report.ms > report.pdf
 
 ```
 
 除了pdf内嵌字体，体积较大以外，其它的功能都可以了。
+
+ms macro
+
+
 
 
