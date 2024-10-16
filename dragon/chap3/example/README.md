@@ -1,3 +1,5 @@
+# groff
+
 如何安装groff的字体，如何生成pdf文件？
 
 ```shell
@@ -13,6 +15,16 @@ groff -ms -Tpdf report.ms > report.pdf
 
 ms macro
 
+# flex
+
+```shell
+$ flex wordcount.l 
+# 生成 lex.yy.c
+$ gcc lex.yy.c -lfl
+$ ./a.out
+the boy 
+^D
+```
 
 
 
