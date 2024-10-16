@@ -3,6 +3,9 @@
 %}
 
 %%
+"("     { return OP; }
+")"     { return CP; }
+"//".*  /* ignore comments on the line */
 "+"     { return ADD; }
 "-"     { return SUB; }
 "*"     { return MUL; }
