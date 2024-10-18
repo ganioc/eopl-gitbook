@@ -1,0 +1,25 @@
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+%}
+%%
+sh*t
+f*k
+win*ows
+Huh? What the f*?
+
+%%
+int main(int argc,const char**argv){
+	for (--argc, ++argv; argc; --argc, ++argv){
+		if(in_word_set(*argv, strlen(*argv))){
+			printf("I dont like you saying '%s'.\n",*argv);
+		}else{
+			printf("Huh? What the f* '%s'?\n", *argv);
+		}
+
+	}
+
+	return 0;
+}
+
