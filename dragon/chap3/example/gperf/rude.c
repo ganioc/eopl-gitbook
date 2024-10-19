@@ -1,5 +1,5 @@
 /* ANSI-C code produced by gperf version 3.1 */
-/* Command-line: gperf rude-1.gperf  */
+/* Command-line: gperf --language=ANSI-C rude-1.gperf  */
 /* Computed positions: -k'' */
 
 #line 1 "rude-1.gperf"
@@ -8,12 +8,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TOTAL_KEYWORDS 5
-#define MIN_WORD_LENGTH 1
-#define MAX_WORD_LENGTH 18
-#define MIN_HASH_VALUE 1
-#define MAX_HASH_VALUE 18
-/* maximum key range = 18, duplicates = 0 */
+#define TOTAL_KEYWORDS 4
+#define MIN_WORD_LENGTH 3
+#define MAX_WORD_LENGTH 17
+#define MIN_HASH_VALUE 3
+#define MAX_HASH_VALUE 17
+/* maximum key range = 15, duplicates = 0 */
 
 #ifdef __GNUC__
 __inline
@@ -34,15 +34,13 @@ in_word_set (register const char *str, register size_t len)
 {
   static const char * wordlist[] =
     {
-      "",
-      "\015",
+      "", "", "",
+      "f*k",
+      "sh*t",
       "", "",
-      "f*k\015",
-      "sh*t\015",
-      "", "",
-      "win*ows\015",
+      "win*ows",
       "", "", "", "", "", "", "", "", "",
-      "Huh? What the f*?\015"
+      "Huh? What the f*?"
     };
 
   if (len <= MAX_WORD_LENGTH && len >= MIN_WORD_LENGTH)
@@ -59,7 +57,7 @@ in_word_set (register const char *str, register size_t len)
     }
   return 0;
 }
-#line 12 "rude-1.gperf"
+#line 11 "rude-1.gperf"
 
 int main(int argc,const char**argv){
 	for (--argc, ++argv; argc; --argc, ++argv){

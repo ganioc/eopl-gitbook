@@ -8,7 +8,6 @@ sh*t
 f*k
 win*ows
 Huh? What the f*?
-
 %%
 int main(int argc,const char**argv){
 	for (--argc, ++argv; argc; --argc, ++argv){
