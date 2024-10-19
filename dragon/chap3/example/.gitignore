@@ -1,5 +1,6 @@
 lex.yy.c
 *.out
+*.exe
 *.pdf
 *~
 *.ps
