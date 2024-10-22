@@ -54,5 +54,11 @@
             }
 .       /* ignore anything else */ ;
 %%
-
+int main(){
+    yylex();
+}
+/* define a linked list of words and types */
+struct word{
+    char *word_name;
+};
 
