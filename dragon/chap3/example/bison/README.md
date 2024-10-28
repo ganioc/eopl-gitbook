@@ -20,4 +20,15 @@ gcc y.tab.c lex.yy.c -lfl
 ```
 
 ## 使用lex, yacc
+使用这本书<< lex & yacc >>, 运行书里的例子。
+
+```shell
+lex lex-ch1.l
+gcc lex.yy.c -ll
+./a.out
+```
+
+### lex-ch1-2.l
+
+
 
