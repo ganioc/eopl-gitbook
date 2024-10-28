@@ -28,7 +28,13 @@ gcc lex.yy.c -ll
 ./a.out
 ```
 
-### lex-ch1-2.l
+### lex-ch1-4.l
 
+
+```shell
+lex lex-ch1-4.l
+
+
+```
 
 
