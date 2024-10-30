@@ -34,7 +34,23 @@ gcc lex.yy.c -ll
 ```shell
 lex lex-ch1-4.l
 
-
 ```
 
+grammar, 语法, 根据特定的token序列，执行某种适当的操作。有一些例子
+```shell
+noun verb.
+noun verb noun.
+subject -> noun | pronoun
+object -> noun
+sentence -> subject verb object
+```
+yacc grammar, 
 
+### lex-ch1-7.y
+使用yacc grammar, 语法。yacc定义文件。
+
+```shell
+yyac -d lex-ch1-7.y # 生成了y.tab.h, y.tab.c
+
+
+``

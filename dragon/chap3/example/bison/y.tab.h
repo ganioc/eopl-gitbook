@@ -39,7 +39,7 @@
 # define YY_YY_Y_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 1
+# define YYDEBUG 0
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -54,7 +54,13 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    T_Int = 258                    /* T_Int  */
+    NOUN = 258,                    /* NOUN  */
+    PRONOUN = 259,                 /* PRONOUN  */
+    VERB = 260,                    /* VERB  */
+    ADVERB = 261,                  /* ADVERB  */
+    ADJECTIVE = 262,               /* ADJECTIVE  */
+    PREPOSITION = 263,             /* PREPOSITION  */
+    CONJUNCTION = 264              /* CONJUNCTION  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -63,7 +69,13 @@ extern int yydebug;
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
-#define T_Int 258
+#define NOUN 258
+#define PRONOUN 259
+#define VERB 260
+#define ADVERB 261
+#define ADJECTIVE 262
+#define PREPOSITION 263
+#define CONJUNCTION 264
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
