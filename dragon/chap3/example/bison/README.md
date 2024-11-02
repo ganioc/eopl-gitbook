@@ -71,3 +71,13 @@ lex ch3-05.l
 gcc y.tab.c lex.yy.c -ly -ll -lm
 ```
 
+### MGL (Menu Generation Language)
+菜单生成语言?
+生成一种语言，来生成menu interface, 菜单接口, 
+输入一个描述文件，-> 生成一个c语言程序,可以用来编译生成输出,
+使用标准的curses library来在屏幕上画caidan, 菜单, menu
+
+在很多场合，需要生成很多tedious, 重复的代码, 可以生成一种语言，写一个小的编译器，将你的语言翻译成C语言文件，你的项目可以处理的。-- 这才是技术!
+Curses编程很繁琐, MGL可以自动进行大部分的layout, 减轻了工作。
+
+
