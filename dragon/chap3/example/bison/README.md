@@ -53,4 +53,21 @@ yacc grammar,
 yyac -d lex-ch1-7.y # 生成了y.tab.h, y.tab.c
 
 
-``
+```
+
+### ch3-05
+这是一个完整的例子
+y.tab.c, lex.yy.c
+y.tab.h
+ch3hdr2.hsudo 
+ch3-05.y,
+ch3-05.l,
+用这些软件,
+
+```shell
+# ch3-05, 进行编译
+yacc -d ch3-05.y
+lex ch3-05.l
+gcc y.tab.c lex.yy.c -ly -ll -lm
+```
+

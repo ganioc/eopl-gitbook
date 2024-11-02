@@ -4,5 +4,6 @@ lex.yy.c
 *.pdf
 *~
 *.ps
+*.o
 
 
