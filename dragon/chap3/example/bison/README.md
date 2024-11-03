@@ -80,4 +80,12 @@ gcc y.tab.c lex.yy.c -ly -ll -lm
 在很多场合，需要生成很多tedious, 重复的代码, 可以生成一种语言，写一个小的编译器，将你的语言翻译成C语言文件，你的项目可以处理的。-- 这才是技术!
 Curses编程很繁琐, MGL可以自动进行大部分的layout, 减轻了工作。
 
+screen <name>
+title <string>
 
+item <string>
+[command <string>]
+action{ execute | menu | quit| ignore} <name>
+[attirubte {visible | invisible}]
+
+end <name>
