@@ -54,7 +54,12 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    COMMAND = 258                  /* COMMAND  */
+    COMMAND = 258,                 /* COMMAND  */
+    ACTION = 259,                  /* ACTION  */
+    IGNORE = 260,                  /* IGNORE  */
+    EXECUTE = 261,                 /* EXECUTE  */
+    ITEM = 262,                    /* ITEM  */
+    QSTRING = 263                  /* QSTRING  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -64,10 +69,24 @@ extern int yydebug;
 #define YYerror 256
 #define YYUNDEF 257
 #define COMMAND 258
+#define ACTION 259
+#define IGNORE 260
+#define EXECUTE 261
+#define ITEM 262
+#define QSTRING 263
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+union YYSTYPE
+{
+#line 8 "mgl-1.y"
+
+    char *string; /* string buffer */
+
+#line 87 "y.tab.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

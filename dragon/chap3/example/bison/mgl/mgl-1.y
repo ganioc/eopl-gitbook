@@ -5,13 +5,24 @@ int lineno=0;
 void yyerror(char *s);
 int yylex();
 %}
-%token COMMAND
+%union{
+    char *string; /* string buffer */
+}
+%token COMMAND ACTION IGNORE EXECUTE ITEM
+%token <string> QSTRING
 
 %%
 
-start: COMMAND
+/* start: COMMAND action 
     ;
-
+    */
+item: ITEM command action 
+    ;
+command: /* empty */
+    | COMMAND
+    ;
+action: ACTION IGNORE
+    | ACTION EXECUTE QSTRING
 %%
 
 void yyerror(char *s){

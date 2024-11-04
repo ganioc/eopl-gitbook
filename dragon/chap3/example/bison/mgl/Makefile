@@ -6,7 +6,7 @@ CC = gcc -DYYDEBUG=1
 .PHONY: clean 
 
 a.out: y.tab.o lex.yy.o
-	$(CC) -o $@ $^ -lfl -lm
+	$(CC) -g -o $@ $^ -lfl -lm
 
 y.tab.o: y.tab.c
 
