@@ -1,0 +1,18 @@
+screen  first
+title   "First"
+title   "Copyright 1992"
+
+item    "first" command first action ignore
+        attribute visible
+item    "second" command second action execute "bin/sh"
+        attribute visible 
+end first 
+
+screen  second 
+title   "Second"
+item    "second" command second action menu first 
+        attribute visible 
+item    "first"  command first action quit 
+        attribute invisible
+end     second 
+

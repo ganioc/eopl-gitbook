@@ -89,3 +89,8 @@ action{ execute | menu | quit| ignore} <name>
 [attirubte {visible | invisible}]
 
 end <name>
+
+mgl.l, lex file,
+mgl.y, yacc file,
+
+P127
