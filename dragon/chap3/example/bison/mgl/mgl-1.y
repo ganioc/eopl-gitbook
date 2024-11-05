@@ -13,11 +13,10 @@ int yylex();
 
 extern void start_screen(char *name);
 extern void end_file();
-
+extern void print_screen(char *name);
 
 #ifdef YYDEBUG
-extern int yydebug;
-yydebug = 1;
+int yydebug = 1;
 #endif
 %}
 
@@ -35,25 +34,31 @@ screens: /* empty */
 screen: screen_name screen_terminator
     | screen_name  screen_contents screen_terminator
     ;
-screen_name: SCREEN ID  { start_screen($2); }
-    | SCREEN            { start_screen(strdup("default")); }
+screen_name: SCREEN ID  { 
+                print_screen($2); 
+                start_screen($2);
+            }
+    | SCREEN            { 
+                print_screen(strdup("default")); 
+                start_screen(strdup("default")); 
+            }
     ;
 screen_terminator: END ID 
     | END
     ;
 screen_contents: titles lines
     ;
-titles: /* empty */ { start_screen("empty title"); }
+titles: /* empty */ { print_screen("empty title"); }
     | titles title  
     ;
-title: TITLE QSTRING { start_screen($2); }
+title: TITLE QSTRING { print_screen($2); }
     ;
-lines: /* empty */  { start_screen("empty line"); } 
+lines: /* empty */  { print_screen("empty line"); } 
     | lines line 
     ;
 line: ITEM QSTRING command ACTION action attribute
     ;
-command: /* empty */ { start_screen("empty command"); }
+command: /* empty */ { print_screen("empty command"); }
     | COMMAND ID
     ;
 /*action: ACTION IGNORE
@@ -62,10 +67,10 @@ command: /* empty */ { start_screen("empty command"); }
 */
 action: EXECUTE QSTRING
     | MENU ID 
-    | QUIT      { start_screen("action quit"); }
+    | QUIT      { print_screen("action quit"); }
     | IGNORE
     ;
-attribute: /* empty */ { start_screen("empty attribute"); }
+attribute: /* empty */ { print_screen("empty attribute"); }
     | ATTRIBUTE VISIBLE
     | ATTRIBUTE INVISIBLE
     ;

@@ -20,7 +20,7 @@ lex.yy.o: lex.yy.c
 screen-1.o: screen-1.c
 
 y.tab.c: mgl-1.y
-	$(YACC)  $^ -d -o y.tab.c
+	$(YACC)  $^  -d -o y.tab.c
 
 
 
