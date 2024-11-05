@@ -77,7 +77,7 @@ void warning(char*s, char *t);
 void yyerror(char *s);
 int yylex();
 
-#line 81 "y.tab.c"
+#line 81 "mgl-1.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -100,61 +100,7 @@ int yylex();
 #  endif
 # endif
 
-/* Use api.header.include to #include this header
-   instead of duplicating it here.  */
-#ifndef YY_YY_Y_TAB_H_INCLUDED
-# define YY_YY_Y_TAB_H_INCLUDED
-/* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-#if YYDEBUG
-extern int yydebug;
-#endif
-
-/* Token kinds.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
-  {
-    YYEMPTY = -2,
-    YYEOF = 0,                     /* "end of file"  */
-    YYerror = 256,                 /* error  */
-    YYUNDEF = 257,                 /* "invalid token"  */
-    COMMAND = 258,                 /* COMMAND  */
-    ACTION = 259,                  /* ACTION  */
-    IGNORE = 260,                  /* IGNORE  */
-    EXECUTE = 261,                 /* EXECUTE  */
-    ITEM = 262,                    /* ITEM  */
-    QSTRING = 263                  /* QSTRING  */
-  };
-  typedef enum yytokentype yytoken_kind_t;
-#endif
-
-/* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 12 "mgl-1.y"
-
-    char *string; /* string buffer */
-
-#line 143 "y.tab.c"
-
-};
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define YYSTYPE_IS_DECLARED 1
-#endif
-
-
-extern YYSTYPE yylval;
-
-
-int yyparse (void);
-
-
-#endif /* !YY_YY_Y_TAB_H_INCLUDED  */
+#include "mgl-1.tab.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1119,7 +1065,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1123 "y.tab.c"
+#line 1069 "mgl-1.tab.c"
 
       default: break;
     }

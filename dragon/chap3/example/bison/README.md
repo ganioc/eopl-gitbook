@@ -94,3 +94,12 @@ mgl.l, lex file,
 mgl.y, yacc file,
 
 P127
+现在的编译方法还是
+```shell
+yacc -d mgl-1.y
+lex  mgl-1.l
+$(CC) -g -o $@ $^ -lfl -lm
+```
+
+
+

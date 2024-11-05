@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include "y.tab.h"
 extern int lineno;
+extern void warning(char*s, char *t);
 %}
+%option noyywrap
+
 ws      [ \t]+
 qstring \"[^\"\n"]*[\"\n]
 nl      \n 
@@ -11,11 +14,11 @@ nl      \n
 {qstring}   {
                 yylval.string = strdup(yytext+1);
                 /* skip open quote */
-                if(yylval.string[yylen - 2] != '"'){
+                if(yylval.string[yyleng - 2] != '"'){
                     warning("Unterminated character string",
                     (char*)0);
                 }else{
-                    yylval.string[yylen - 2] = '\0';
+                    yylval.string[yyleng - 2] = '\0';
                     /* remove close quote */
                     return QSTRING;
                 }
