@@ -14,6 +14,7 @@ int yylex();
 extern void start_screen(char *name);
 extern void end_file();
 extern void print_screen(char *name);
+extern void add_line(int action, int attrib);
 
 #ifdef YYDEBUG
 int yydebug = 1;
@@ -43,23 +44,34 @@ screen_name: SCREEN ID  {
                 start_screen(strdup("default")); 
             }
     ;
-screen_terminator: END ID 
+screen_terminator: END ID { 
+                print_screen($2);
+                end_screen($2); 
+            }
     | END
     ;
 screen_contents: titles lines
     ;
-titles: /* empty */ { print_screen("empty title"); }
+titles: /* empty */ {   print_screen("empty title"); 
+                    }
     | titles title  
     ;
-title: TITLE QSTRING { print_screen($2); }
+title: TITLE QSTRING {  print_screen($2); 
+                        add_title($2);  }
     ;
 lines: /* empty */  { print_screen("empty line"); } 
     | lines line 
     ;
 line: ITEM QSTRING command ACTION action attribute
+        {
+            item_str = $2;
+            add_line($5, $6);
+            $$ = ITEM;
+        }
     ;
-command: /* empty */ { print_screen("empty command"); }
-    | COMMAND ID
+command: /* empty */ { print_screen("empty command");
+                        cmd_str = strdup("");  }
+    | COMMAND ID    { cmd_str = $2; }
     ;
 /*action: ACTION IGNORE
     | ACTION EXECUTE QSTRING
@@ -67,12 +79,28 @@ command: /* empty */ { print_screen("empty command"); }
 */
 action: EXECUTE QSTRING
     | MENU ID 
-    | QUIT      { print_screen("action quit"); }
+    | QUIT      { print_screen("action quit");
+                  $$ = QUIT;  }
     | IGNORE
     ;
-attribute: /* empty */ { print_screen("empty attribute"); }
+attribute: /* empty */ { print_screen("empty attribute");
+                        $$ = VISIBLE;  }
     | ATTRIBUTE VISIBLE
     | ATTRIBUTE INVISIBLE
+    ;
+id: ID      { $$ = $1; }
+    | QSTRING {
+            warning("String literal inappropriate", 
+                    (char *)0);
+            $$ = $1; /* but use it anyway */
+        }
+    ;
+qstirng: QSTRING { $$ = $1; }
+    | ID {
+            warning("Non-string literal inappropriate",
+                    (char *)0);
+            $$ = $1; /* but use it anyway */
+        }
     ;
 %%
 #define DEFAULT_OUTFILE "screen.out"

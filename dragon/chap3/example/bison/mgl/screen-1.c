@@ -3,10 +3,35 @@
 #include <string.h>
 #include <time.h>
 
+#include "y.tab.h"  
+
+/* macros */
+#define SCREEN_SIZE     80
+
 extern FILE *yyout;
 extern void warning(char*s, char *t);
 
+/* imprts */
+extern int screen_done;
+extern char *cmd_str, *item_str, *act_str;
+
+/* exports */
+static char current_screen[100];
 static int done_start_init = 0;
+static int done_end_init;
+static int current_line;
+
+struct item
+{
+    /* data */
+    char        *desc; /* item description */
+    char        *cmd;   /* command */
+    int         action; /* action to take */
+    char        *act_str; /* action operation */
+    int         attribute; /* visible/invisible */
+    struct item *next;  /* next member of list */
+    
+} *item_list, *last_item;
 
 /*
  * MGL Runtime support code
@@ -30,7 +55,21 @@ char *screen_init[] = {
     "};\n",
     0,
 };
-
+char *menu_init[] = {
+    "menu_init()",
+    "{",
+    "\tvoid menu_cleanup();\n",
+    "\tsignal(SIGINT, menu_cleanup);",
+    "\tinitscr();",
+    "\tcrmode();",
+    "}\n\n",
+    "menu_cleanup()",
+    "{",
+    "\tmvcur(0,COLS-1, LINES-1,0);",
+    "\tendwin();",
+    "}\n",
+    0,
+};
 char *menu_runtime[]={
     "/* runtime */",
     "",
@@ -187,7 +226,7 @@ void end_file(){
  * progress (thus, if a screen is in progress when EOF
  * is seen, an appropriate error message can be given).
  */
-void start_screen(char *name){
+int start_screen(char *name){
     long tm = time((long *)0);
 
     if(!done_start_init){
@@ -206,7 +245,100 @@ void start_screen(char *name){
     fprintf(yyout, "void menu_%s()\n{\n", name);
     fprintf(yyout, "\textern struct item menu_%s_items[];\n\n",
         name);
-    
+    fprintf(yyout, "\tif(!init) menu_init();\n\n");
+    fprintf(yyout, "\tclear();\n\trefresh();\n");
 
+    if(strlen(name) > sizeof(current_screen)) {
+        warning("Screen name is larger than the buffer", (char*)0);
+    }
+
+    strncpy(current_screen, name, sizeof(current_screen) - 1);
+
+    screen_done = 0;
+    current_line = 0;
+
+    return 0;
 }
 
+/*  add_title 
+ * add centered text to screen code.
+*/
+void add_title(char *line){
+    int length = strlen(line);
+    int space = (SCREEN_SIZE - length)/2;
+
+    fprintf(yyout, "\tmove(%d,%d);\n", current_line, space);
+    current_line++;
+    fprintf(yyout,"\taddstr(\"%s\");\n",line);
+    fprintf(yyout, "\trefresh();\n");
+}
+
+/* add_line:
+ * Add a line to the actions table. It will be written
+ * out after all lines have been added. Note that some
+ * of the information is in global variables. 
+*/
+void add_line(int action, int attrib){
+    struct item *new; 
+
+    new = (struct item *)malloc(sizeof(struct item));
+    
+    if(!item_list){
+        /* first item */
+        item_list = last_item = new;
+    }else{
+        /* already items on the list */
+        last_item->next = new;
+        last_item = new; 
+    }
+
+    new->next = NULL; /* mark end of list */
+    new->desc = item_str;
+    new->cmd = cmd_str;
+    new->action = action;
+
+    switch (action)
+    {
+    case EXECUTE:
+        /* code */
+        new->act_str = act_str;
+        break;
+    case MENU:
+        new->act_str = act_str;
+        break;
+    default:
+        new->act_str = 0;
+        break;
+    }
+    new->attribute = attrib;
+}
+
+/* end_screen:
+ * Finish screen, print out postamble. 
+*/
+void end_screen(char *name){
+    fprintf(yyout, "\tmenu_runtime(menu_%s_items);\n",
+        name);
+
+    if(strcmp(current_screen, name) != 0){
+        warning("name mismatch at end of screen",
+            current_screen);
+    }
+
+    fprintf(yyout, "}\n");
+    fprintf(yyout, "/* end %s */\n", current_screen);
+
+    process_items();
+
+    /* write initialization code out to file */
+    if(!done_end_init){
+        done_end_init = 1;
+        dump_data(menu_init);
+    }
+
+    current_screen[0] = '\0'; /* no current screen */
+
+    screen_done = 1;
+
+    return 0;
+}
