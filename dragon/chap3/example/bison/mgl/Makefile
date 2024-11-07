@@ -11,7 +11,7 @@ INCPATH = -I/usr/include
 .PHONY: clean 
 
 a.out: y.tab.o lex.yy.o screen-1.o
-	$(CC) -g -o $@ $^ $(INCPATH) $(LDPATH) -lfl -lm
+	$(CC) -g -o $@ $^ $(INCPATH) $(LDPATH) -lfl
 
 y.tab.o: y.tab.c
 

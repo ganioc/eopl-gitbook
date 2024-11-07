@@ -1,5 +1,5 @@
 # My test screen description file. 
 screen  main
 title "MAIN"
-item "ITEM" command CMD1 action quit
+# item "ITEM" command CMD1 action quit
 end main

@@ -4,7 +4,11 @@
 #include <string.h>
 #include <unistd.h>
 
-int screen_done = 1; /* 1 if done, - otherwise */
+int   screen_done = 1; /* 1 if done, - otherwise */
+char *act_str;  /* extra argument for an action */
+char *cmd_str;  /* extra argument for command */
+char *item_str; /* extra argument for item description */
+
 int lineno=0;
 
 void warning(char*s, char *t);
@@ -15,6 +19,8 @@ extern void start_screen(char *name);
 extern void end_file();
 extern void print_screen(char *name);
 extern void add_line(int action, int attrib);
+extern void end_screen(char *name);
+extern void add_title(char *line);
 
 #ifdef YYDEBUG
 int yydebug = 1;
@@ -24,10 +30,17 @@ int yydebug = 1;
 
 %union{
     char *string; /* string buffer */
+    int  cmd;     /* command value */
 }
-%token COMMAND ACTION IGNORE EXECUTE ITEM TITLE SCREEN END
-%token <string> QSTRING ID
-%token QUIT MENU ATTRIBUTE VISIBLE INVISIBLE 
+%token <cmd> COMMAND ACTION IGNORE EXECUTE ITEM TITLE SCREEN END EMPTY
+%token <string> QSTRING ID COMMENT
+%token <cmd> QUIT MENU ATTRIBUTE VISIBLE INVISIBLE
+
+%type <cmd> action line attribute command
+%type <string> id qstring 
+
+%start screens
+
 %%
 screens: /* empty */
     | screens screen 
@@ -66,7 +79,7 @@ line: ITEM QSTRING command ACTION action attribute
         {
             item_str = $2;
             add_line($5, $6);
-            $$ = ITEM;
+            /* $$ = ITEM; */
         }
     ;
 command: /* empty */ { print_screen("empty command");
@@ -80,26 +93,28 @@ command: /* empty */ { print_screen("empty command");
 action: EXECUTE QSTRING
     | MENU ID 
     | QUIT      { print_screen("action quit");
-                  $$ = QUIT;  }
+                  /* $$ = QUIT;  */
+                }
     | IGNORE
     ;
 attribute: /* empty */ { print_screen("empty attribute");
-                        $$ = VISIBLE;  }
+                       /* $$ = VISIBLE;  */
+                    }
     | ATTRIBUTE VISIBLE
     | ATTRIBUTE INVISIBLE
     ;
-id: ID      { $$ = $1; }
+id: ID      { /* $$ = $1; */ }
     | QSTRING {
             warning("String literal inappropriate", 
                     (char *)0);
-            $$ = $1; /* but use it anyway */
+            /* $$ = $1;  */ /* but use it anyway */
         }
     ;
-qstirng: QSTRING { $$ = $1; }
+qstirng: QSTRING { /* $$ = $1; */ }
     | ID {
             warning("Non-string literal inappropriate",
                     (char *)0);
-            $$ = $1; /* but use it anyway */
+            /* $$ = $1; */  /* but use it anyway */
         }
     ;
 %%

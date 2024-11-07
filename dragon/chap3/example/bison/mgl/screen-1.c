@@ -166,7 +166,11 @@ void print_screen(char *name){
     printf("%s\n", name);
     printf("=================================\n");
 }
-
+void cfree(char *p){
+    if(p){
+        free(p);
+    }
+}
 /*
  * Check a name to see if it has already been used. If 
  * not , return 1; otherwise , return 0. This routine also
@@ -312,7 +316,55 @@ void add_line(int action, int attrib){
     }
     new->attribute = attrib;
 }
+/* process_items:
+ * Walk the list of menu items and write them to an 
+ * external initialized array. Also defines the symbolic
+ * constant used for the run-time support module (which
+ * is below this table).
+*/
+void process_items(void ){
+    int cnt = 0;
+    struct item *ptr;
 
+    if(item_list == 0){
+        return; /* nothing to do */
+    }
+    fprintf(yyout, "struct item menu_%s_items[]={\n",
+        current_screen);
+    ptr = item_list;
+
+    /* climb through the list */
+    while(ptr){
+        struct item *optr;
+
+        if(ptr->action == MENU){
+            fprintf(yyout,
+                "{\"%s\",\"%s\",%d,\"\",%s,%d},\n",
+                ptr->desc,ptr->cmd,ptr->action,
+                ptr->act_str, ptr->attribute
+                );
+        }else{
+            fprintf(yyout,
+                "{\"%s\",\"%s\",%d,\"%s\",0,%d},\n",
+                ptr->desc,ptr->cmd,ptr->action,
+                ptr->act_str?ptr->act_str:"",
+                ptr->attribute);
+        }
+        cfree(ptr->desc);
+        cfree(ptr->cmd);
+        cfree(ptr->act_str);
+        optr = ptr;
+        ptr = ptr->next;
+        free(optr);
+        cnt++;
+    }
+    fprintf(yyout,
+        "{(char *)0,(char *)0, 0, (char *)0, 0, 0},\n");
+    fprintf(yyout, "};\n\n");
+    item_list = 0;
+
+    /* next the run-time module that does all the work */
+}
 /* end_screen:
  * Finish screen, print out postamble. 
 */
@@ -340,5 +392,4 @@ void end_screen(char *name){
 
     screen_done = 1;
 
-    return 0;
 }
