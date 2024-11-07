@@ -2,6 +2,7 @@
     "files.associations": {
         "*.md": "markdown",
         "stdio.h": "c",
-        "mgl-code": "c"
+        "mgl-code": "c",
+        "y.tab.h": "c"
     }
 }

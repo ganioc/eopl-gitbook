@@ -48,7 +48,7 @@ screens: /* empty */
 screen: screen_name screen_terminator
     | screen_name  screen_contents screen_terminator
     ;
-screen_name: SCREEN ID  { 
+screen_name: SCREEN id { 
                 print_screen($2); 
                 start_screen($2);
             }
@@ -57,11 +57,13 @@ screen_name: SCREEN ID  {
                 start_screen(strdup("default")); 
             }
     ;
-screen_terminator: END ID { 
+screen_terminator: END id { 
                 print_screen($2);
                 end_screen($2); 
             }
-    | END
+    | END   {
+                end_screen(strdup("default"));
+            }
     ;
 screen_contents: titles lines
     ;
@@ -69,7 +71,7 @@ titles: /* empty */ {   print_screen("empty title");
                     }
     | titles title  
     ;
-title: TITLE QSTRING {  print_screen($2); 
+title: TITLE qstring {  print_screen($2); 
                         add_title($2);  }
     ;
 lines: /* empty */  { print_screen("empty line"); } 
@@ -103,18 +105,19 @@ attribute: /* empty */ { print_screen("empty attribute");
     | ATTRIBUTE VISIBLE
     | ATTRIBUTE INVISIBLE
     ;
-id: ID      { /* $$ = $1; */ }
+id: ID      {  $$ = $1; }
     | QSTRING {
             warning("String literal inappropriate", 
                     (char *)0);
-            /* $$ = $1;  */ /* but use it anyway */
+            $$ = $1;  /* but use it anyway */
         }
     ;
-qstirng: QSTRING { /* $$ = $1; */ }
-    | ID {
+qstring: QSTRING {  
             warning("Non-string literal inappropriate",
                     (char *)0);
-            /* $$ = $1; */  /* but use it anyway */
+            $$ = $1;  }
+    | ID {
+            $$ = $1;   /* but use it anyway */
         }
     ;
 %%
