@@ -9,7 +9,7 @@ char *act_str;  /* extra argument for an action */
 char *cmd_str;  /* extra argument for command */
 char *item_str; /* extra argument for item description */
 
-int lineno=0;
+
 
 void warning(char*s, char *t);
 void yyerror(char *s);
@@ -81,29 +81,40 @@ line: ITEM QSTRING command ACTION action attribute
         {
             item_str = $2;
             add_line($5, $6);
-            /* $$ = ITEM; */
+            $$ = ITEM; 
         }
     ;
 command: /* empty */ { print_screen("empty command");
                         cmd_str = strdup("");  }
-    | COMMAND ID    { cmd_str = $2; }
+    | COMMAND id    { cmd_str = $2; }
     ;
 /*action: ACTION IGNORE
     | ACTION EXECUTE QSTRING
     ;
 */
-action: EXECUTE QSTRING
-    | MENU ID 
+action: EXECUTE qstring {
+            act_str = $2;
+            $$ = EXECUTE;
+        }
+    | MENU id {
+        /* make menu_$2 */
+            act_str = malloc(strlen($2) + 6);
+            strcpy(act_str, "menu_");
+            strcat(act_str, $2);
+            free($2);
+            $$ = MENU;
+        }
     | QUIT      { print_screen("action quit");
-                  /* $$ = QUIT;  */
+                  $$ = QUIT;  
                 }
-    | IGNORE
+    | IGNORE    { $$ = IGNORE; }
     ;
-attribute: /* empty */ { print_screen("empty attribute");
-                       /* $$ = VISIBLE;  */
+attribute: /* empty */ { 
+                    print_screen("empty attribute");
+                    $$ = VISIBLE;
                     }
-    | ATTRIBUTE VISIBLE
-    | ATTRIBUTE INVISIBLE
+    | ATTRIBUTE VISIBLE { $$ = VISIBLE;  }
+    | ATTRIBUTE INVISIBLE { $$ = INVISIBLE; }
     ;
 id: ID      {  $$ = $1; }
     | QSTRING {
@@ -113,10 +124,11 @@ id: ID      {  $$ = $1; }
         }
     ;
 qstring: QSTRING {  
-            warning("Non-string literal inappropriate",
-                    (char *)0);
+
             $$ = $1;  }
     | ID {
+            warning("Non-string literal inappropriate",
+                    (char *)0);
             $$ = $1;   /* but use it anyway */
         }
     ;
@@ -126,7 +138,7 @@ qstring: QSTRING {
 char *usage = "%s usage [infile] [outfile]\n";
 
 char *progname = "mgl";
-
+int lineno=0;
 
 void yyerror(char *s){
     fprintf(stderr, "error: %s\n", s);

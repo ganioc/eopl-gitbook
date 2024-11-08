@@ -8,7 +8,7 @@
 /* macros */
 #define SCREEN_SIZE     80
 
-extern FILE *yyout;
+extern FILE *yyin, *yyout;
 extern void warning(char*s, char *t);
 
 /* imprts */

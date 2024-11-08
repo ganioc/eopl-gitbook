@@ -13,19 +13,6 @@ nl      \n
 id      [a-zA-Z][a-zA-Z0-9]*
 %%
 {ws}  ;
-action      { return ACTION; }
-execute     { return EXECUTE; }
-command     { return COMMAND; }
-ignore      { return IGNORE;  }
-item        { return ITEM;    }
-title       { return TITLE;   }
-screen      { return SCREEN;  }
-end         { return END;     }
-quit        { return QUIT; }
-menu        { return MENU; }
-attribute   { return ATTRIBUTE; }
-visible     { return VISIBLE; }
-invisible   { return INVISIBLE; }
 {comment}   ;
 {qstring}   {
                 yylval.string = strdup(yytext+1);
@@ -39,6 +26,20 @@ invisible   { return INVISIBLE; }
                     return QSTRING;
                 }
             }
+action      { return ACTION; }
+execute     { return EXECUTE; }
+command     { return COMMAND; }
+ignore      { return IGNORE;  }
+item        { return ITEM;    }
+title       { return TITLE;   }
+screen      { return SCREEN;  }
+
+quit        { return QUIT; }
+menu        { return MENU; }
+attribute   { return ATTRIBUTE; }
+visible     { return VISIBLE; }
+invisible   { return INVISIBLE; }
+end         { return END;     }
 {id}        { yylval.string = strdup(yytext);
                 return ID;  }
 {nl}        { lineno++; }
