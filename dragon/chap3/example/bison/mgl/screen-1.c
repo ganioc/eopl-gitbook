@@ -71,7 +71,7 @@ char *menu_init[] = {
     0,
 };
 char *menu_runtime[]={
-    "/* runtime */",
+    "/* menu runtime */",
     "",
     "void menu_runtime(struct item *items)",
     "{",
@@ -127,15 +127,15 @@ char *menu_runtime[]={
     "\t\t\tsystem(ptr->act_str);",
     "\t\t\tbreak;",
     "\t\tcase MENU:",
-    "\t\t\trefresh();"
+    "\t\t\trefresh();",
     "\t\t\t(*ptr->act_menu)();",
     "\t\t\tbreak;",
     "\t\tdefault:",
     "\t\t\tprintw(\"default case, no action\\n\");",
     "\t\t\trefresh();",
-    "\t\t\tbreak;"
+    "\t\t\tbreak;",
     "\t\t}",
-    "\t\trefresh();"
+    "\t\trefresh();",
     "\t}",
     "}",
     "",

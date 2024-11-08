@@ -101,9 +101,9 @@ char *menu_runtime[]={
     "\t\tdefault:",
     "\t\t\tprintw(\"default case, no action\\n\");",
     "\t\t\trefresh();",
-    "\t\t\tbreak;"
-    "\t\t}",
-    "\t\trefresh();"
+    "\t\t\tbreak;\n"
+    "\t}",
+    "\trefresh();\n"
     "\t}",
     "}",
     "",
