@@ -86,13 +86,16 @@ line: ITEM QSTRING command ACTION action attribute
     ;
 command: /* empty */ { print_screen("empty command");
                         cmd_str = strdup("");  }
-    | COMMAND id    { cmd_str = $2; }
+    | COMMAND id    { 
+            print_screen($2);
+            cmd_str = $2; }
     ;
 /*action: ACTION IGNORE
     | ACTION EXECUTE QSTRING
     ;
 */
 action: EXECUTE qstring {
+            print_screen($2);
             act_str = $2;
             $$ = EXECUTE;
         }
@@ -113,8 +116,12 @@ attribute: /* empty */ {
                     print_screen("empty attribute");
                     $$ = VISIBLE;
                     }
-    | ATTRIBUTE VISIBLE { $$ = VISIBLE;  }
-    | ATTRIBUTE INVISIBLE { $$ = INVISIBLE; }
+    | ATTRIBUTE VISIBLE { 
+            print_screen("attribute visible");
+            $$ = VISIBLE;  }
+    | ATTRIBUTE INVISIBLE { 
+            print_screen("attribute invisible");
+            $$ = INVISIBLE; }
     ;
 id: ID      {  $$ = $1; }
     | QSTRING {
