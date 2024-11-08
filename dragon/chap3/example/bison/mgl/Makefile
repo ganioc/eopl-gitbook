@@ -29,11 +29,11 @@ lex.yy.c: mgl-1.l y.tab.h
  
 clean:
 	@rm -f a.out *.o 
-	@rm -f y.tab.h y.tab.c lex.yy.c screen-main.c 
+	@rm -f y.tab.h y.tab.c lex.yy.c screen-out.c 
 
 main:
-	cp screen.out screen-main.c 
-	gcc -o main.out screen-main.c -lcurses -ltermcap
+	echo -n "\nvoid main(){\n\tmenu_second();\n\tmenu_cleanup();\n}\n" >> screen-out.c
+	gcc -o main.out screen-out.c -lcurses -ltermcap
 
 
  
