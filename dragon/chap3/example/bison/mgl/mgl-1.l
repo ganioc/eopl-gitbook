@@ -32,7 +32,7 @@ command     { return COMMAND; }
 ignore      { return IGNORE;  }
 item        { return ITEM;    }
 title       { return TITLE;   }
-screen      { return SCREEN;  }
+screen      { return YSCREEN;  }
 
 quit        { return QUIT; }
 menu        { return MENU; }

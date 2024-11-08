@@ -39,10 +39,12 @@ struct item
  */
 char *screen_init[] = {
     "/* initialization information */",
-    "static int init;\n",
+
     "#include <curses.h>",
     "#include <sys/signal.h>",
     "#include <ctype.h>\n",
+    "#include \"y.tab.h\"\n",
+    "static int init;\n",
     //"#include \"mglyac.h\"\n",
     "/* structure used to store menu items */",
     "struct item {",
@@ -121,7 +123,7 @@ char *menu_runtime[]={
     "\t\t\treturn 0;",
     "\t\tcase IGNORE:",
     "\t\t\trefresh();",
-    "\t\t\tbreak;"
+    "\t\t\tbreak;",
     "\t\tcase EXECUTE:",
     "\t\t\trefresh();",
     "\t\t\tsystem(ptr->act_str);",

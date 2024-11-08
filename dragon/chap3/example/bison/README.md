@@ -95,11 +95,14 @@ mgl.y, yacc file,
 
 P127
 现在的编译方法还是
+
 ```shell
 yacc -d mgl-1.y
 lex  mgl-1.l
 $(CC) -g -o $@ $^ -lfl -lm
 ```
+
+ 生成了一个c文件，用来生成menu程序，可以选择菜单。
 
 
 

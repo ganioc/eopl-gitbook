@@ -8,7 +8,7 @@ INCPATH = -I/usr/include
 
 #VPATH=/usr/lib
 
-.PHONY: clean 
+.PHONY: clean main
 
 a.out: y.tab.o lex.yy.o screen-1.o
 	$(CC) -g -o $@ $^ $(INCPATH) $(LDPATH) -lfl
@@ -29,6 +29,11 @@ lex.yy.c: mgl-1.l y.tab.h
  
 clean:
 	@rm -f a.out *.o 
-	@rm -f y.tab.h y.tab.c lex.yy.c 
+	@rm -f y.tab.h y.tab.c lex.yy.c screen-main.c 
+
+main:
+	cp screen.out screen-main.c 
+	gcc -o main.out screen-main.c -lcurses -ltermcap
 
 
+ 

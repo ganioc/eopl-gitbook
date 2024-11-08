@@ -32,7 +32,7 @@ int yydebug = 1;
     char *string; /* string buffer */
     int  cmd;     /* command value */
 }
-%token <cmd> COMMAND ACTION IGNORE EXECUTE ITEM TITLE SCREEN END EMPTY
+%token <cmd> COMMAND ACTION IGNORE EXECUTE ITEM TITLE YSCREEN END EMPTY
 %token <string> QSTRING ID COMMENT
 %token <cmd> QUIT MENU ATTRIBUTE VISIBLE INVISIBLE
 
@@ -48,11 +48,11 @@ screens: /* empty */
 screen: screen_name screen_terminator
     | screen_name  screen_contents screen_terminator
     ;
-screen_name: SCREEN id { 
+screen_name: YSCREEN id { 
                 print_screen($2); 
                 start_screen($2);
             }
-    | SCREEN            { 
+    | YSCREEN            { 
                 print_screen(strdup("default")); 
                 start_screen(strdup("default")); 
             }
@@ -140,7 +140,7 @@ qstring: QSTRING {
         }
     ;
 %%
-#define DEFAULT_OUTFILE "screen.out"
+#define DEFAULT_OUTFILE "screen-out.c"
 
 char *usage = "%s usage [infile] [outfile]\n";
 
