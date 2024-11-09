@@ -3,7 +3,7 @@ title "First"
 
 item "dummy line" command dummy action ignore 
     attribute visible
-item "run shell" command shell action execute "/bin/sh"
+item "run shell" command shell action execute "yes"
     attribute visible
 
 end first 

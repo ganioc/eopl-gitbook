@@ -43,6 +43,7 @@ char *screen_init[] = {
     "#include <curses.h>",
     "#include <sys/signal.h>",
     "#include <ctype.h>\n",
+    "#include <stdlib.h>",
     "#include \"y.tab.h\"\n",
     "static int init;\n",
     //"#include \"mglyac.h\"\n",
@@ -55,27 +56,31 @@ char *screen_init[] = {
     "\tint (*act_menu)(); /* call appropriate function */",
     "\tint attribute;",
     "};\n",
+    "int casecmp(char *p, char *q);",
+    "int menu_runtime(struct item *items);",
+    "void menu_init();\n",
     0,
 };
 char *menu_init[] = {
-    "menu_init()",
+    "void menu_cleanup()",
     "{",
-    "\tvoid menu_cleanup();\n",
+    "\tmvcur(0,COLS-1, LINES-1,0);",
+    "\tendwin();",
+    "}\n\n",
+    "void menu_init()",
+    "{",
+    "\tmenu_cleanup();\n",
     "\tsignal(SIGINT, menu_cleanup);",
     "\tinitscr();",
     "\tcrmode();",
     "}\n\n",
-    "menu_cleanup()",
-    "{",
-    "\tmvcur(0,COLS-1, LINES-1,0);",
-    "\tendwin();",
-    "}\n",
+
     0,
 };
 char *menu_runtime[]={
     "/* menu runtime */",
     "",
-    "void menu_runtime(struct item *items)",
+    "int menu_runtime(struct item *items)",
     "{",
     "\tint visible = 0;",
     "\tint choice = 0;",
@@ -248,7 +253,7 @@ int start_screen(char *name){
     }
 
     fprintf(yyout, "/* screen %s */\n", name);
-    fprintf(yyout, "void menu_%s()\n{\n", name);
+    fprintf(yyout, "int menu_%s()\n{\n", name);
     fprintf(yyout, "\textern struct item menu_%s_items[];\n\n",
         name);
     fprintf(yyout, "\tif(!init) menu_init();\n\n");

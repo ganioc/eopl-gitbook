@@ -32,7 +32,7 @@ clean:
 	@rm -f y.tab.h y.tab.c lex.yy.c screen-out.c 
 
 main:
-	echo -n "\nvoid main(){\n\tmenu_second();\n\tmenu_cleanup();\n}\n" >> screen-out.c
+	echo -n "/* main() entry */\n\nvoid main(){\n\tmenu_second();\n\tmenu_cleanup();\n}\n" >> screen-out.c
 	gcc -o main.out screen-out.c -lcurses -ltermcap
 
 
