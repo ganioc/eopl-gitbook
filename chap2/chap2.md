@@ -91,10 +91,14 @@ BNF is often extended with a few notational shortcuts. One can write a set of ru
 
 $$
 \begin{aligned}
-\langle list\text{--}of\text{--}numbers \rangle &::= () | (\langle number\rangle \space . \space \langle list\text{--}of\text{--}numbers \rangle )
-
+    \langle list\text{--}numbers \rangle
 \end{aligned}
+$$
 
+$$ 
+\begin{aligned}
+\langle list\text{--}of\text{--}numbers \rangle &::= () | (\langle number\rangle \space . \space \langle list\text{--}of\text{--}numbers \rangle )
+\end{aligned} 
 $$
 
 $\quad$ Another shortcut is the $Kleene \space star$, expressed by the notation $\{...\}^*$. When this appears in a right-hand side, it indicates a sequence of any number of instances of whatever appears between the braces. This includes the possibility of no instances at all. Using the Kleene star, the definition of $\langle list\text{--}of\text{--}numbers \rangle$ in list notation is simply
@@ -102,9 +106,7 @@ $\quad$ Another shortcut is the $Kleene \space star$, expressed by the notation 
 $$
 \begin{aligned}
 \langle list\text{--}of\text{--}numbers \rangle &::=  (\{\langle number\rangle\}^* )
-
 \end{aligned}
-
 $$
 
 $\quad$ If there are zero instances, we get the empty list. A variant of the star notation is $Kleene plus \{... \}^+$, which indicates a sequence of $one$ or more instances. Substituting $^+$ for $^*$ in the above example would define the syntactic category of nonempty lists of numbers. These notational shortcuts are just that $\text{--}$ it is always possible to do without them by using additional BNF rules.
@@ -147,7 +149,6 @@ $$
 \langle vector \rangle &::=  \# (\{ \langle datum \rangle \}^*) \\
 \langle datum \rangle &::= \langle number \rangle | \langle symbol \rangle | \langle boolean \rangle  \\
 &| \langle string \rangle | \langle list \rangle | \langle dotted\text{--}datum \rangle | \langle vector \rangle
-
 \end{aligned}
 $$
 
@@ -156,7 +157,6 @@ $$
 These four syntactic categories are all defined in terms of each other. This is legitimate because there are some simple possibilities for data that are not defined in terms of the other categories.
 
 $\quad$ To illustrate the use of this grammar, consider the following syntactic derivation proving that $(\#t \space (foo \space . \space ()) \space 3)$ is a datum.
-
 $$
 \begin{aligned}
 &\langle list \rangle \\
